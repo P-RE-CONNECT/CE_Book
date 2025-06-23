@@ -1,1 +1,1 @@
-# Diagnostic Tests
+# Diagnostische Toetsen

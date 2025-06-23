@@ -1,3 +1,3 @@
-# Start Here
+# Start Hier
 
-Welcome to the P-RE-CONNECT book. This page will explain how you can use this book.
+Welkom bij het boek P-RE-CONNECT. Op deze pagina leggen we uit hoe je dit boek kunt gebruiken.

@@ -1,12 +1,12 @@
 (content:cm_intro)=
 
-# Introduction
+# Introductie
 
-Welcome to the Construction Mechanics course chain page of this *P-RE-CONNECT Civil Engineering* TeachBook. Each course in this chain (**Construction Mechanics 1, 2, and 3**) builds upon the knowledge and skills of its predecessor. To help you navigate these connections effectively, each course has its own dedicated section where:
+Welkom op de Constructiemechanica leerlijn pagina van dit *P-RE-CONNECT Civiele Techniek* TeachBook. Elke cursus in deze reeks (**Constructiemechanica 1, 2 en 3**) bouwt voort op de kennis en vaardigheden van zijn voorganger. Om je te helpen deze verbanden effectief te navigeren, heeft elke cursus een eigen sectie waar:
 
-* **the prerequisites** of the course are explained,
-* a **short summary** of the course is provided,
-* a **diagnostic test** is available to help you quickly assess your understanding of key concepts,
-* and **practice exercises** are included to help you prepare for your exam.
+* de **vereiste voorkennis** van de cursus worden uitgelegd,
+* een **korte samenvatting** van de cursus wordt gegeven,
+* een **diagnostische test** beschikbaar is om je te helpen snel je begrip van de belangrijkste concepten te testen,
+* en **oefeningen** zijn opgenomen om je te helpen je voor te bereiden op je examen.
 
-This structure is designed to give you a clear overview of what is expected, allow you to reflect on your prior knowledge, and support you in studying both smarter and more efficiently, whether you’re preparing for a first attempt, a resit, or a follow-up course. By using this book, you can strengthen your foundation and increase your confidence throughout the entire Construction Mechanics learning line.
+Deze structuur is ontworpen om je een duidelijk overzicht te geven van wat er van je verwacht wordt, je te laten reflecteren op je voorkennis en je te ondersteunen bij het slimmer en efficiënter studeren, of je je nu voorbereidt op een eerste poging, een herkansing of een vervolgcursus. Door dit boek te gebruiken, kun je je basis versterken en je zelfvertrouwen vergroten gedurende de gehele leerlijn Constructiemechanicamechanica.

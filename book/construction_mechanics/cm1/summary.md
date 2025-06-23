@@ -1,3 +1,3 @@
-(content:cm1:summary)=
-# Summary
+(content:cm1:samenvatting)=
+# Samenvatting
 

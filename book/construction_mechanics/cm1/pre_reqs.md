@@ -1,4 +1,4 @@
-(content:cm1:pre_reqs)=
-# Prerequisites
+(content:cm1:voorkennis)=
+# Voorkennis
 
-To follow **Construction Mechanics 1**, no specific prior coursework is required. A general understanding of high school-level **mathematics and physics** is sufficient to begin. Since CM1 is an introductory course, being admitted to the Civil Engineering program is considered enough preparation. All essential concepts will be introduced step by step, making the course accessible for all first-year students.
+Om **Constructiemechanica 1** te volgen, is geen specifieke voorkennis vereist. Een algemene kennis van **wiskunde en natuurkunde** op middelbareschoolniveau is voldoende om te beginnen. Omdat CM1 een inleidende cursus is, wordt toelating tot de opleiding Civiele Techniek als voldoende voorbereiding beschouwd. Alle essentiële concepten worden stapsgewijs geïntroduceerd, waardoor de cursus toegankelijk is voor alle eerstejaarsstudenten.

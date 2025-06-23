@@ -1,15 +1,15 @@
 (intro)=
-# Welcome to P-RE-CONNECT!
+# Welkom bij P-RE-CONNECT!
 
-Welcome to the Civil Engineering P-RE-CONNECT book. In this book, P-RE-CONNECT helps you Prepare, Repair, and Connect courses. The only course chain currently implemented is Construction Mechanics. 
+Welkom bij het boek P-RE-CONNECT voor Civiele Techniek. In dit boek helpt P-RE-CONNECT je bij het voorbereiden, repareren en verbinden van cursussen. De enige leerlijn die momenteel wordt gebruikt, is Constructiemechanica.
 
-### Prepare
-- Look through the prerequisites for a course to see if you are well prepared.
-- Do a quick [diagnostic test](/diagnostic_tests.md) to test your knowledge.
+### Voorbereiden (Prepare)
+- Bekijk de vereisten voor een cursus om te zien of je goed voorbereid bent.
+- Doe een snelle [diagnostische test](/diagnostic_tests.md) om je kennis te testen.
 
-### Repair
-- Use the summary to study for course topics
-- Do practice exercises that are on exam level
+### Repareren (REpair)
+- Gebruik de samenvatting om de cursusonderwerpen te bestuderen
+- Doe oefeningen op examenniveau
 
-### Connect
-- Use the [interactive course graph](/course_map.md) to see links between courses
+### Verbinden (CONNECT)
+- Gebruik de [interactieve cursusgrafiek](/course_map.md) om koppelingen tussen cursussen te bekijken

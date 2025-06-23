@@ -10,7 +10,7 @@ parts:
     - file: route_60.md
     - file: glossary/interactive_glossary.ipynb
 
-  - caption: Construction Mechanics
+  - caption: Constructionmechanica
     chapters:
     - file: construction_mechanics/construction_mechanics.md
     - file: construction_mechanics/cm1/cm1.md
@@ -32,7 +32,7 @@ parts:
         - file: construction_mechanics/cm3/diag_test.md
         - file: construction_mechanics/cm3/practice_exercises.md
 
-  - caption: Miscellaneous
+  - caption: Overig
     chapters:
     - file: faq.md
     - file: feedback.md

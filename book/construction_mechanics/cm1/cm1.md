@@ -1,13 +1,13 @@
 (content:cm1:intro)=
-# Construction Mechanics 1
+# Constructiemechanica 1
 
-Welcome to the **Construction Mechanics 1 (CM1)** section of the P-RE-CONNECT Civil Engineering TeachBook. CM1 is the foundation of the Construction Mechanics course chain and introduces you to the basic principles of structural analysis, including equilibrium, internal forces, and simple structures.
+Welkom bij het onderdeel **Constructiemechanica 1 (CM1)** van het P-RE-CONNECT Civiele Techniek TeachBook. CM1 vormt de basis van de cursusreeks Constructiemechanica en introduceert je in de basisprincipes van constructieve analyse, waaronder evenwicht, interne krachten en eenvoudige constructies.
 
-In this section, you will find:
+In deze sectie vindt je:
 
-- An explanation of the **{ref}`prior knowledge <content:cm1:pre_reqs>`** you are expected to have before starting CM1,
-- A **{ref}`small summary <content:cm1:summary>`** of the course and its concepts,
-- A **{ref}`diagnostic test <content:cm1:diag_test>`** to help you identify which topics you have already mastered and which might need more attention,
-- And a selection of **{ref}`targeted practice exercises <content:cm1:prac_exs>`** to help you prepare for the exam or build a stronger foundation for future courses such as CM2 and CM3.
+- Een uitleg van de **{ref}`voorkennis <content:cm1:voorkennis>`** die je geacht wordt te hebben voordat je met CM1 begint,
+- Een **{ref}`korte samenvatting <content:cm1:samenvatting>`** van de cursus en de concepten ervan,
+- Een **{ref}`diagnostische test <content:cm1:diag_test>`** om te bepalen welke onderwerpen je al beheerst en welke mogelijk meer aandacht nodig hebben,
+- En een selectie van **{ref}`gerichte oefeningen <content:cm1:oefenopdrachten>`** om je voor te bereiden op het examen of om een ​​sterkere basis te leggen voor toekomstige cursussen zoals CM2 en CM3.
 
-Whether you're taking CM1 for the first time, preparing for a resit, or reviewing key concepts before continuing to CM2 or CM3, this section is designed to guide your learning step by step and help you gain confidence in the core principles of construction mechanics.
+Of je nu voor het eerst CM1 volgt, je je voorbereidt op een herexamen of de belangrijkste concepten nog eens doorneemt voordat je doorgaat met CM2 of CM3, dit onderdeel is bedoeld om je stap voor stap te begeleiden bij je leerproces en je te helpen vertrouwen te krijgen in de kernprincipes van constructiemechanica.

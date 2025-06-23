@@ -1,2 +1,2 @@
-(content:cm1:prac_exs)=
-# Practice Exercises
+(content:cm1:oefenopdrachten)=
+# Oefenopdrachten
