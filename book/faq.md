@@ -1,4 +1,6 @@
-# Frequently Asked Questions
+# Veelgestelde Vragen
 
-Q:
-A:
+```{admonition} Vraag 1
+:class: tip, dropdown
+Antwoord
+```

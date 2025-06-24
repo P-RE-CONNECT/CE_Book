@@ -1,3 +1,3 @@
 # Feedback
 
-Want to give feedback? You can message us on: (email)
+Wil je feedback geven? Je kan ons bereiken via: (email)
