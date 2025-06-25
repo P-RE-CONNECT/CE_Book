@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,48 +7,81 @@
   <style>
     html, body {
       margin: 0;
-      height: 100%;
+      padding: 0;
+      overflow: visible;
     }
     #c {
       width: 100%;
       height: 100%;
       display: block;
     }
+
+    #info {
+      margin-top: 20px;
+      font-family: sans-serif;
+      max-width: 700px;
+      padding: 10px;
+      line-height: 1.5;
+      overflow: visible;
+    }
+
+    #info ul {
+      margin: 10px 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
+    #info li {
+      margin-bottom: 5px;
+      display: list-item;
+    }
   </style>
 </head>
+<script>
+  function sendHeight() {
+    const height = document.documentElement.scrollHeight;
+    parent.postMessage({ type: 'setHeight', height: height }, '*');
+  }
+
+  // Trigger bij laden én interactie
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('click', sendHeight); // voor als tekstvelden uitklappen
+</script>
 <body>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     const svg = d3.select("body")
       .append("svg")
       .attr("width", "100%")
-      .attr("height", 200)
+      .attr("height", null)
       .style("border", "1px solid #ccc");
 
     const info = d3.select("body")
       .append("div")
       .attr("id", "info")
+      .attr("height", null)
       .style("margin-top", "20px")
       .style("font-family", "sans-serif");
 
     const blocks = [
-      { id: "block1", x: 50, y: 50, text: "CM1", info: "Construction Mechanics 1" },
-      { id: "block2", x: 200, y: 50, text: "CM2", info: "Construction Mechanics 2" },
-      { id: "block3", x: 350, y: 50, text: "CM3", info: "Construction Mechanics 3" }
+      { id: "block1", x: 50, y: 50, text: "CM1", info: "Constructiemechanica 1" },
+      { id: "block2", x: 200, y: 50, text: "CM2", info: "Constructiemechanica 2" },
+      { id: "block3", x: 350, y: 50, text: "CM3", info: "Constructiemechanica 3" }
     ];
 
     const arrows = [
-      { id: "arrow1", x1: 150, y1: 75, x2: 200, y2: 75, info: "Construction Mechanics 1 => Construction Mechanics 2" },
-      { id: "arrow2", x1: 300, y1: 75, x2: 350, y2: 75, info: "Construction Mechanics 2 => Construction Mechanics 3" }
+      { id: "arrow1", x1: 150, y1: 75, x2: 200, y2: 75, info: "Constructiemechanica 1 => Constructiemechanica 2" },
+      { id: "arrow2", x1: 300, y1: 75, x2: 350, y2: 75, info: "Constructiemechanica 2 => Constructiemechanica 3" }
     ];
 
     const detailedInfo = {
-      block1: "Construction Mechanics 1: This course covers the basics of construction mechanics, including forces, moments, and equilibrium.",
-      block2: "Construction Mechanics 2: This course builds on CM1, introducing stress, strain, and material properties.",
-      block3: "Construction Mechanics 3: This course focuses on advanced topics like structural analysis and dynamics.",
-      arrow1: "Construction Mechanics 1 => Construction Mechanics 2: This arrow represents the progression from CM1 to CM2.",
-      arrow2: "Construction Mechanics 2 => Construction Mechanics 3: This arrow represents the progression from CM2 to CM3."
+      block1: "<b>Constructiemechanica 1:</b><br><ul><li>Inleiding in evenwicht en interne krachten</li><li>Analyseren van eenvoudige statisch bepaalde constructies</li></ul>",
+      block2: "<b>Constructiemechanica 2:</b><br><ul><li>Toepassen van evenwichtsvergelijkingen en virtueel werk op skeletstructuren</li><li>Bepalen van verplaatsingen met Williot-constructies en vergeet-mij-nietjes</li><li>Berekenen van spanningen in dikke en dunne doorsnedes door krachten en momenten</li></ul>",
+      block3: "<b>Constructiemechanica 3:</b><br><ul><li>Geavanceerde spannings- en vervormingsanalyse</li><li>Stabiliteitsanalyse en kritieke belasting</li></ul>",
+      arrow1: "<b>Van CM1 naar CM2:</b><br><ul><li>Evenwicht, interne krachten en steunreacties</li><li>Gebruik van virtueel werk (alleen bij balkconstructies)</li></ul>",
+      arrow2: "<b>Van CM2 naar CM3:</b><br><ul><li>Verplaatsingen met Williot en vergeet-mij-nietjes</li><li>Spanningsanalyse bij doorsnedes</li></ul>"
     };
+
 
     // Define arrowhead marker
     svg.append("defs")
@@ -83,7 +116,7 @@
         .on("click", function () {
           clearBorders();
           d3.select(this).attr("stroke", "red").attr("stroke-width", 2);
-          info.text(detailedInfo[block.id]);
+          info.html(detailedInfo[block.id]);
         });
 
       svg.append("text")
@@ -92,13 +125,14 @@
         .style("text-anchor", "middle")
         .style("dominant-baseline", "middle")
         .attr("font-family", "Verdana")
+        .attr("font-weight", "bold")
         .attr("font-size", 12)
         .attr("fill", "black")
         .text(block.text)
         .on("click", function () {
           clearBorders();
           d3.select(`#${block.id}`).attr("stroke", "red").attr("stroke-width", 2);
-          info.text(detailedInfo[block.id]);
+          info.html(detailedInfo[block.id]);
         });
     });
 
@@ -115,7 +149,7 @@
         .on("click", function () {
           clearBorders();
           d3.select(`#${arrow.id}`).attr("stroke", "red").attr("stroke-width", 2);
-          info.text(detailedInfo[arrow.id]);
+          info.html(detailedInfo[arrow.id]);
         });
         
       svg.append("line")
@@ -130,17 +164,178 @@
     });
   </script>
 </body>
-</html>
+</html> -->
 
-<!-- <script>
-  async function loadPlot() {
-    try {
-      const res = await fetch('barchart.json');
-      const fig = await res.json();
-      Plotly.newPlot('plotDiv', fig.data, fig.layout || {});
-    } catch (e) {
-      console.error("Error loading plot:", e);
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constructiemechanica Cursusgrafiek</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: visible;
     }
-  }
-  loadPlot();
-</script> -->
+    #info {
+      margin-top: 0px;
+      font-family: sans-serif;
+      max-width: 700px;
+      padding: 10px;
+      line-height: 1.5;
+    }
+    #info ul {
+      margin: 10px 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+    #info li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    function sendHeight() {
+      const height = document.documentElement.scrollHeight;
+      parent.postMessage({ type: 'setHeight', height: height }, '*');
+    }
+
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('click', sendHeight);
+
+    const blockWidth = 100;
+    const blockHeight = 50;
+    const spacing = 50;
+    const blockCount = 3;
+    const svgWidth = window.innerWidth;
+    const svgHeight = 120;
+    const startX = (svgWidth - ((blockWidth * blockCount) + (spacing * (blockCount - 1)))) / 2;
+
+    const blocks = [
+      { id: "block1", x: startX, y: 50, text: "CM1" },
+      { id: "block2", x: startX + blockWidth + spacing, y: 50, text: "CM2" },
+      { id: "block3", x: startX + 2 * (blockWidth + spacing), y: 50, text: "CM3" }
+    ];
+
+    const arrows = [
+      {
+        id: "arrow1",
+        x1: blocks[0].x + blockWidth,
+        y1: blocks[0].y + blockHeight / 2,
+        x2: blocks[1].x,
+        y2: blocks[1].y + blockHeight / 2
+      },
+      {
+        id: "arrow2",
+        x1: blocks[1].x + blockWidth,
+        y1: blocks[1].y + blockHeight / 2,
+        x2: blocks[2].x,
+        y2: blocks[2].y + blockHeight / 2
+      }
+    ];
+
+    const detailedInfo = {
+      block1: "<b>Constructiemechanica 1:</b><br><ul><li>Inleiding in evenwicht en interne krachten</li><li>Analyseren van eenvoudige statisch bepaalde constructies</li></ul>",
+      block2: "<b>Constructiemechanica 2:</b><br><ul><li>Toepassen van evenwichtsvergelijkingen en virtueel werk</li><li>Verplaatsingen met Williot & vergeet-mij-nietjes</li><li>Spanningen in doorsnedes door krachten en momenten</li></ul>",
+      block3: "<b>Constructiemechanica 3:</b><br><ul><li>Spannings- en vervormingsanalyse</li><li>Stabiliteitsanalyse & kritieke belasting</li></ul>",
+      arrow1: "<b>Van CM1 naar CM2:</b><br><ul><li>Evenwicht, interne krachten, steunreacties</li><li>Virtueel werk (voor balken)</li></ul>",
+      arrow2: "<b>Van CM2 naar CM3:</b><br><ul><li>Verplaatsingen met Williot/Vergeet-mij-nietjes</li><li>Spanningsanalyse bij doorsnedes</li></ul>"
+    };
+
+    const svg = d3.select("body")
+      .append("svg")
+      .attr("width", svgWidth)
+      .attr("height", svgHeight);
+
+    const info = d3.select("body")
+      .append("div")
+      .attr("id", "info");
+
+    // Arrowhead
+    svg.append("defs")
+      .append("marker")
+      .attr("id", "arrowhead")
+      .attr("markerWidth", 10)
+      .attr("markerHeight", 7)
+      .attr("refX", 10)
+      .attr("refY", 3.5)
+      .attr("orient", "auto")
+      .attr("markerUnits", "strokeWidth")
+      .append("polygon")
+      .attr("points", "0 0, 10 3.5, 0 7")
+      .attr("fill", "black");
+
+    // Clear borders function
+    function clearBorders() {
+      d3.selectAll("rect").attr("stroke", "none");
+      d3.selectAll("line").attr("stroke", "black");
+    }
+
+    // Draw blocks
+    blocks.forEach(block => {
+      svg.append("rect")
+        .attr("id", block.id)
+        .attr("x", block.x)
+        .attr("y", block.y)
+        .attr("width", blockWidth)
+        .attr("height", blockHeight)
+        .attr("rx", 15)
+        .attr("fill", "#add8e6")
+        .on("click", function () {
+          clearBorders();
+          d3.select(this).attr("stroke", "red").attr("stroke-width", 2);
+          info.html(detailedInfo[block.id]);
+          sendHeight();
+        });
+
+      svg.append("text")
+        .attr("x", block.x + blockWidth / 2)
+        .attr("y", block.y + blockHeight / 2)
+        .style("text-anchor", "middle")
+        .style("dominant-baseline", "middle")
+        .attr("font-family", "Verdana")
+        .attr("font-size", 12)
+        .attr("font-weight", "bold")
+        .attr("fill", "black")
+        .text(block.text)
+        .on("click", function () {
+          clearBorders();
+          d3.select(`#${block.id}`).attr("stroke", "red").attr("stroke-width", 2);
+          info.html(detailedInfo[block.id]);
+          sendHeight();
+        });
+    });
+
+    // Draw arrows
+    arrows.forEach(arrow => {
+      svg.append("rect")
+        .attr("id", arrow.id)
+        .attr("x", arrow.x1)
+        .attr("y", arrow.y1 - 15)
+        .attr("width", arrow.x2 - arrow.x1)
+        .attr("height", 30)
+        .attr("fill", "none")
+        .attr("pointer-events", "visible")
+        .on("click", function () {
+          clearBorders();
+          d3.select(`#${arrow.id}`).attr("stroke", "red").attr("stroke-width", 2);
+          info.html(detailedInfo[arrow.id]);
+        });
+        
+      svg.append("line")
+        .attr("id", arrow.id)
+        .attr("x1", arrow.x1)
+        .attr("y1", arrow.y1)
+        .attr("x2", arrow.x2)
+        .attr("y2", arrow.y2)
+        .attr("stroke", "black")
+        .attr("stroke-width", 2)
+        .attr("marker-end", "url(#arrowhead)")
+    });
+
+  </script>
+</body>
+</html>
