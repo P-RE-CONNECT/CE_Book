@@ -238,9 +238,92 @@
     ];
 
     const detailedInfo = {
-      block1: "<b>Constructiemechanica 1:</b><br><ul><li>Inleiding in evenwicht en interne krachten</li><li>Analyseren van eenvoudige statisch bepaalde constructies</li></ul>",
-      block2: "<b>Constructiemechanica 2:</b><br><ul><li>Toepassen van evenwichtsvergelijkingen en virtueel werk</li><li>Verplaatsingen met Williot & vergeet-mij-nietjes</li><li>Spanningen in doorsnedes door krachten en momenten</li></ul>",
-      block3: "<b>Constructiemechanica 3:</b><br><ul><li>Spannings- en vervormingsanalyse</li><li>Stabiliteitsanalyse & kritieke belasting</li></ul>",
+      block1: "<b>Constructiemechanica 1:</b><br>" +
+        "<i>Evenwicht en krachten:</i><br><ul>\
+          <li>Voorwaarden voor krachtevenwicht van puntmassa's en starre lichamen in 2D en 3D</li> \
+          <li>Ontbinden, samenstellen en verplaatsen van krachten</li> \
+          <li>Analytische en grafische methoden voor krachtenanalyse</li></ul>" +
+        "<i>Constructiemodellen en bepaaldheid:</i><br><ul>\
+          <li>Schematisering van constructies met lijnvormige modellen</li>\
+          <li>Begrippen statische en kinematische bepaaldheid en onbepaaldheid</li>\
+          <li>Herkennen van vormvaste samengestelde constructies</li></ul>" +
+        "<i>Belastingen en resultanten:</i><br><ul>\
+          <li>Bepalen van resultante en werklijn van verdeelde belastingen</li></ul>" +
+        "<i>Vakwerken:</i><br><ul>\
+          <li>Eigenschappen en structuur van vakwerken</li>\
+          <li>Analyseren van krachtsverdeling in statisch bepaalde vakwerken</li>\
+          <li>Herkennen van nulstaven</li></ul>" +
+        "<i>Snedekrachten:</i><br><ul>\
+          <li>Verloop van normaalkracht (N), dwarskracht (V) en moment (M) in liggers</li>\
+          <li>Grafische weergave in snedekrachtlijnen</li>\
+          <li>Relaties tussen belasting en snedekrachtverloop</li></ul>" +
+        "<i>Integrale krachtsanalyse:</i><br><ul>\
+          <li>Systematische benadering van krachtsverdeling in constructies</li>\
+          <li>Toepassing van stapelbare analysemethoden, inclusief geknikte constructies</li></ul>" +
+        "<i>Kabels en krachtlijnen:</i><br><ul>\
+          <li>Relatie tussen kabelvorm en momentenlijn</li>\
+          <li>Kabelvergelijking en toepassing op eenvoudige configuraties</li>\
+          <li>Begrip en interpretatie van krachtlijnen</li></ul>" +
+        "<i>Virtuele arbeid:</i><br><ul>\
+          <li>Begrip arbeid binnen mechanica</li>\
+          <li>Methode van virtuele arbeid voor bepalen van reacties en snedekrachten</li></ul>"
+      ,
+      block2: "<b>Constructiemechanica 2:</b><br>" +
+        "<i>Doorsnede-eigenschappen:</i><br><ul>" +
+          "<li>Oppervlaktematen zoals statisch moment, traagheidsmoment en traagheidsproduct</li>" +
+          "<li>Ligging van het normaalkrachtencentrum</li>" +
+          "<li>Rekstijfheid en buigstijfheid</li>" +
+        "</ul>" +
+        "<i>Normaalspanningen:</i><br><ul>" +
+          "<li>Spanningsverdeling door extensie en buiging</li>" +
+          "<li>Kern van de doorsnede en spanningen bij dubbele buiging</li>" +
+          "<li>Het vezelmodel van een staaf onder belasting</li>" +
+        "</ul>" +
+        "<i>Schuifspanningen:</i><br><ul>" +
+          "<li>Schuifspanningen door dwarskrachten en wringing</li>" +
+          "<li>Formule van Bredt voor dunwandige kokers</li>" +
+          "<li>Schuifkrachtverdeling in langsrichting (bijv. bij stiften of lassen)</li>" +
+          "<li>Dwarskrachtencentrum en zijn effect op torsie</li>" +
+        "</ul>" +
+        "<i>Vervorming en differentiaalvergelijkingen:</i><br><ul>" +
+          "<li>Rek en kromming als gevolg van krachten en momenten</li>" +
+          "<li>Differentiaalvergelijkingen voor extensie en buiging</li>" +
+          "<li>Rand- en overgangsvoorwaarden</li>" +
+        "</ul>" +
+        "<i>Visuele methoden voor vervorming:</i><br><ul>" +
+          "<li>Verplaatsing via vergeet-mij-nietjes (buiging)</li>" +
+          "<li>Relatieve verplaatsingen via het Williot-diagram (vakwerken)</li>" +
+          "<li>Momentenvlakstellingen en M/EI-methode</li>" +
+        "</ul>" +
+        "<i>Statisch onbepaalde constructies:</i><br><ul>" +
+          "<li>Introductie in vormveranderingsvoorwaarden</li>" +
+          "<li>Krachtsverdeling bepalen in eenvoudige statisch onbepaalde constructies</li>" +
+        "</ul>"
+      ,
+      block3: "<b>Constructiemechanica 3:</b><br>" +
+        "<i>Statisch onbepaalde constructies:</i><br><ul>" +
+          "<li>Oplossingsprincipes via de krachtenmethode (hoofdsysteem, statisch onbepaalden, vormveranderingsvoorwaarden)</li>" +
+          "<li>Gebruik van het gereduceerde momentenvlak en vergeet-mij-nietjes voor uitwerking</li>" +
+          "<li>Systematiek van de verplaatsingenmethode en toepassing op eenvoudige systemen</li>" +
+          "<li>Gevoeligheid voor opgelegde vervormingen zoals steunpuntszettingen en temperatuurverschillen</li>" +
+          "<li>Effect van stijfheidsverschillen op de krachtsverdeling in een constructie</li>" +
+        "</ul>" +
+        "<i>Stabiliteit van het evenwicht:</i><br><ul>" +
+          "<li>Begrippen zoals plaatsvastheid, vormvastheid en betrouwbaar evenwicht</li>" +
+          "<li>Analyse van systemen met 1 of 2 vrijheidsgraden</li>" +
+          "<li>Eulerknik en differentiaalvergelijking voor knik (2e en 4e orde)</li>" +
+          "<li>Invloed van randvoorwaarden (zoals geschoorde en ongeschoorde staven, verende inklemming)</li>" +
+          "<li>Initiële verplaatsingen, vergrotingsfactoren en 2e orde effecten</li>" +
+          "<li>Effecten van niet-lineair (plastisch) materiaalgedrag op stabiliteitsgrenzen</li>" +
+        "</ul>" +
+        "<i>Elasticiteitstheorie:</i><br><ul>" +
+          "<li>3D spannings- en rektensoren en hun transformaties</li>" +
+          "<li>Spannings-rek relaties voor isotrope, lineair-elastische materialen</li>" +
+          "<li>Grafische en analytische toepassing van de cirkel van Mohr</li>" +
+          "<li>Gebruik van hoofdspanningen voor het bepalen van bezwijkcondities</li>" +
+          "<li>Bezwijkcriteria volgens von Mises en Tresca, en toepassing op veiligheidstoetsing</li>" +
+        "</ul>"
+      ,
       arrow1: "<b>Van CM1 naar CM2:</b><br><ul><li>Evenwicht, interne krachten, steunreacties</li><li>Virtueel werk (voor balken)</li></ul>",
       arrow2: "<b>Van CM2 naar CM3:</b><br><ul><li>Verplaatsingen met Williot/Vergeet-mij-nietjes</li><li>Spanningsanalyse bij doorsnedes</li></ul>"
     };

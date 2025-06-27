@@ -10,7 +10,7 @@ Deze visualisatie is bedoeld om je inzicht te geven in de samenhang tussen de va
 
 ## Constructiemechanica leerlijn
 
-Onderstaande interactieve grafiek laat de opbouw zien van de cursusreeks **Constructiemechanica** binnen de bachelor Civiele Techniek. De vakken **CM1**, **CM2** en **CM3** bouwen logisch op elkaar voort en vormen samen een belangrijke leerlijn in het curriculum.
+Onderstaande interactieve grafiek laat de opbouw zien van de cursusreeks **Constructiemechanica** binnen de bachelor Civiele Techniek. De vakken **CM1**, **CM2** en **CM3** bouwen logisch op elkaar voort en vormen samen een belangrijke leerlijn in het curriculum. 
 
 <script>
   window.addEventListener('message', function(event) {
