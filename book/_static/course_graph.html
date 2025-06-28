@@ -324,8 +324,21 @@
           "<li>Bezwijkcriteria volgens von Mises en Tresca, en toepassing op veiligheidstoetsing</li>" +
         "</ul>"
       ,
-      arrow1: "<b>Van CM1 naar CM2:</b><br><ul><li>Evenwicht, interne krachten, steunreacties</li><li>Virtueel werk (voor balken)</li></ul>",
-      arrow2: "<b>Van CM2 naar CM3:</b><br><ul><li>Verplaatsingen met Williot/Vergeet-mij-nietjes</li><li>Spanningsanalyse bij doorsnedes</li></ul>"
+      arrow1: "<b>Van CM1 naar CM2:</b><br><ul>" +
+        "<li>Evenwichtsvergelijkingen toepassen op statisch bepaalde skeletstructuren</li>" +
+        "<li>Bepalen van steunreacties bij vlakke constructies</li>" +
+        "<li>Bepalen van snedekrachten in liggerconstructies (N, V, M-lijnen)</li>" +
+        "<li>Gebruik van virtuele arbeid bij balkconstructies</li>" +
+        "<li>Vormanalyse van kabelconstructies en relatie met momentlijnen</li>" +
+      "</ul>"
+      ,
+      arrow2: "<b>Van CM2 naar CM3:</b><br><ul>" +
+        "<li>Vervormingsbepaling van vakwerken met behulp van het Williot-diagram</li>" +
+        "<li>Vervormingsbepaling van liggers met behulp van vergeet-mij-nietjes</li>" +
+        "<li>Spanningsverdeling in dikke en dunne doorsnedes bij normaalkrachten</li>" +
+        "<li>Spanningsverdeling door buiging en wringing (draaikrachten)</li>" +
+      "</ul>"
+
     };
 
     const svg = d3.select("body")
