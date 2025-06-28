@@ -10,4 +10,4 @@ In deze sectie vind je:
 * Een **{ref}`diagnostische test <content:cm3:diag_test>`** om inzicht te krijgen in je huidige beheersing van de benodigde voorkennis,
 * En een selectie van **{ref}`gerichte oefenopgaven <content:cm3:oefenopdrachten>`** om je voor te bereiden op het tentamen of om je kennis te verdiepen voor toekomstige toepassing.
 
-CM3 vraagt een sterk begrip van de stof uit CM1 en CM2, en daagt je uit om die kennis toe te passen op meer realistische en complexe situaties. Deze pagina helpt je gestructureerd terug te grijpen op eerdere kennis, hiaten op te sporen en gerichte oefening te bieden, zodat je met meer vertrouwen aan CM3 begint of het vak met succes afrondt.
+CM3 vraagt een sterk begrip van de stof uit {ref}`CM1 <content:cm1:intro>` en {ref}`CM2 <content:cm2:intro>`, en daagt je uit om die kennis toe te passen op meer realistische en complexe situaties. Deze pagina helpt je gestructureerd terug te grijpen op eerdere kennis, hiaten op te sporen en gerichte oefening te bieden, zodat je met meer vertrouwen aan CM3 begint of het vak met succes afrondt.

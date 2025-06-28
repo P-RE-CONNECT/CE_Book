@@ -1,7 +1,7 @@
 (content:cm2:intro)=
 # Constructiemechanica 2
 
-Welkom bij het onderdeel **Constructiemechanica 2 (CM2)** van het P-RE-CONNECT Civiele Techniek TeachBook. CM2 bouwt voort op de concepten die in CM1 zijn geïntroduceerd en richt zich op het analyseren van spanningsleer in een doorsnede, snedekrachten, verplaatsingen en hoekverdraaiingen.
+Welkom bij het onderdeel **Constructiemechanica 2 (CM2)** van het P-RE-CONNECT Civiele Techniek TeachBook. CM2 bouwt voort op de concepten die in {ref}`CM1 <content:cm1:samenvatting>` zijn geïntroduceerd en richt zich op het analyseren van spanningsleer in een doorsnede, snedekrachten, verplaatsingen en hoekverdraaiingen.
 
 In deze sectie vind je:
 
