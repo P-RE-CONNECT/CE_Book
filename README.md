@@ -27,10 +27,10 @@ Voor **docenten** die hun onderwijs willen verbeteren en meer inzicht willen kri
 ## 👥 Contributors
 Dit boek is ontwikkeld en onderhouden door:
 
-T.R. (Tom) van Woudenberg
-Dr.i. A.A. (Sandra) Verhagen
-J. (Jimmy) van der Wereld
-T. (Thom) van der Ven
+- T.R. (Tom) van Woudenberg
+- Dr.i. A.A. (Sandra) Verhagen
+- J. (Jimmy) van der Wereld
+- T. (Thom) van der Ven
 
 ## 📬 Contact
 Voor vragen of feedback kunt u contact opnemen met het cursuscoördinatieteam of een probleem openen in deze repository.
