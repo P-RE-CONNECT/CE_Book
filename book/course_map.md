@@ -1,7 +1,7 @@
 (content:inter_curs_grafiek)=
 # Interactieve Cursusgrafiek
 
-Opdeze pagina kan je de interactieve cursusgrafieken vinden per leerlijn. In deze grafieken kun je:
+Op deze pagina kan je de interactieve cursusgrafieken vinden per leerlijn. In deze grafieken kun je:
 
 * **Klikken op een vak** (bijvoorbeeld CM2) om een korte toelichting te zien op de inhoud van dat vak.
 * **Klikken op de pijlen** tussen de vakken om te ontdekken welke **voorkennis en vaardigheden** vereist zijn om het volgende vak succesvol te kunnen volgen.
