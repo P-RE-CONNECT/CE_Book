@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Math Glossary</title>
+  <style>
+    .glossary-controls {
+      margin-bottom: 1em;
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+    }
+    .glossary-controls label {
+      font-weight: bold;
+      margin-bottom: 0.25em;
+    }
+    #search-bar {
+      width: 100%;
+      min-width: 180px;
+      height: 2.4em;
+      box-sizing: border-box;
+      margin-bottom: 0.5em;
+    }
+    .glossary-table th, .glossary-table td { text-align: left; padding: 4px 8px; }
+    .glossary-table { border-collapse: collapse; min-width: 400px; width: max-content; }
+    .glossary-table th { background: #f1f1f1; }
+    .glossary-table td, .glossary-table th { border: 1px solid #ccc; }
+    #glossary-table {
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 100%;
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      chtml: { mtextInheritFont: true }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="glossary-controls">
+  <label for="search-bar">Search:</label>
+  <input type="text" id="search-bar" placeholder="Search symbol or meaning...">
+</div>
+<div id="glossary-table"></div>
+
+<script>
+// ---- 1. Data ----
+const glossaryData = [
+  {"$\\Sigma$":"$\\prod$","Sigma":"-","Sum":"Product operator"},
+  {"$\\Sigma$":"$\\mathbb{N}$","Sigma":"-","Sum":"Natural numbers = {1, 2, 3, …}"},
+  {"$\\Sigma$":"$\\mathbb{Z}$","Sigma":"-","Sum":"Integers = {…, -1, 0, 1, …}"},
+  {"$\\Sigma$":"$\\mathbb{Q}$","Sigma":"-","Sum":"Rational numbers = {p/q ; p and q are integers}"},
+  {"$\\Sigma$":"$\\mathbb{I}$","Sigma":"-","Sum":"Irrational numbers = {non-rational numbers; $\\sqrt{2}$}"},
+  {"$\\Sigma$":"$\\mathbb{R}$","Sigma":"-","Sum":"Real numbers = {All of the above sets}"},
+  {"$\\Sigma$":"$\\forall$","Sigma":"-","Sum":"For all"},
+  {"$\\Sigma$":"$\\vee$","Sigma":"-","Sum":"Logical or"},
+  {"$\\Sigma$":"$\\wedge$","Sigma":"-","Sum":"Logical and"},
+  {"$\\Sigma$":"$\\mathcal{O}$","Sigma":"-","Sum":"Big-O notation (order)"},
+  {"$\\Sigma$":"$>$","Sigma":"-","Sum":"Greater than"},
+  {"$\\Sigma$":"$<$","Sigma":"-","Sum":"Smaller than"},
+  {"$\\Sigma$":"$\\gg$","Sigma":"-","Sum":"Much greater than"},
+  {"$\\Sigma$":"$\\ll$","Sigma":"-","Sum":"Much smaller than"},
+  {"$\\Sigma$":"$!$","Sigma":"-","Sum":"Factorial"},
+  {"$\\Sigma$":"$\\equiv$","Sigma":"-","Sum":"Is identical to"},
+  {"$\\Sigma$":"$\\in$","Sigma":"-","Sum":"Is an element of"},
+  {"$\\Sigma$":"$\\ni$","Sigma":"-","Sum":"Contains"},
+  {"$\\Sigma$":"$\\propto$","Sigma":"-","Sum":"Is proportionate to"},
+  {"$\\Sigma$":"$\\exists$","Sigma":"-","Sum":"There exists"},
+  {"$\\Sigma$":"$\\nexists$","Sigma":"-","Sum":"There does not exist"},
+  {"$\\Sigma$":"$\\approx$","Sigma":"-","Sum":"Approximately equal to"},
+  {"$\\Sigma$":"$\\perp$","Sigma":"-","Sum":"Perpendicular/orthogonal"},
+  {"$\\Sigma$":"$\\cap$","Sigma":"-","Sum":"Intersect"},
+  {"$\\Sigma$":"$\\cup$","Sigma":"-","Sum":"Union"},
+  {"$\\Sigma$":"$\\infty$","Sigma":"-","Sum":"Infinity"}
+];
+
+// ---- 2. UI Setup ----
+const searchBar = document.getElementById("search-bar");
+const tableDiv = document.getElementById("glossary-table");
+
+// ---- 3. Main render function ----
+function renderGlossary() {
+  const searchQuery = searchBar.value.trim().toLowerCase();
+  const headers = ["Symbol", "Meaning"];
+  const rows = glossaryData
+    .map(row => [row["$\\Sigma$"], row["Sum"]])
+    .filter(row =>
+      !searchQuery ||
+      row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery))
+    );
+
+  let html = "<table class='glossary-table'><thead><tr>";
+  headers.forEach(h => html += `<th>${h}</th>`);
+  html += "</tr></thead><tbody>";
+  rows.forEach(r => {
+    html += "<tr>";
+    r.forEach(cell => html += `<td>${cell || ""}</td>`);
+    html += "</tr>";
+  });
+  html += "</tbody></table>";
+  tableDiv.innerHTML = html;
+  if (window.MathJax && window.MathJax.typeset) { MathJax.typeset(); }
+  sendHeightToParent();
+}
+
+// ---- 4. Auto-height resize for iframe embedding ----
+function sendHeightToParent() {
+  if (window.parent !== window) {
+    var extraPadding = 20;
+    var newHeight = document.body.scrollHeight + extraPadding;
+    window.parent.postMessage({
+      type: 'setHeight',
+      glossaryId: 'math',
+      height: newHeight
+    }, '*');
+  }
+}
+
+// ---- 5. Attach event listeners ----
+searchBar.addEventListener("input", renderGlossary);
+
+// ---- 6. Initial render ----
+window.addEventListener("DOMContentLoaded", function() {
+  renderGlossary();
+  sendHeightToParent();
+});
+</script>
+</body>
+</html>
