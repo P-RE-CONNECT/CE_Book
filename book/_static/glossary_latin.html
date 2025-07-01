@@ -189,8 +189,14 @@ function renderGlossary() {
   });
   html += "</tbody></table>";
   tableDiv.innerHTML = html;
-  if (window.MathJax && window.MathJax.typeset) { MathJax.typeset(); }
-  sendHeightToParent();
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    MathJax.typesetPromise().then(sendHeightToParent);
+  } else if (window.MathJax && window.MathJax.typeset) {
+    MathJax.typeset();
+    sendHeightToParent();
+  } else {
+    sendHeightToParent();
+  }
 }
 
 // ---- 6. Auto-height resize for iframe embedding ----
@@ -213,7 +219,6 @@ searchBar.addEventListener("input", renderGlossary);
 // ---- 8. Initial render ----
 window.addEventListener("DOMContentLoaded", function() {
   renderGlossary();
-  sendHeightToParent();
 });
 </script>
 </body>
