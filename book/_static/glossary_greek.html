@@ -94,6 +94,40 @@ const courseCols = allColumns.filter(c => !baseCols.includes(c));
 
 // ---- 3. UI Setup ----
 const courseSelect = document.getElementById("course-select");
+function updateCourseSelectBehavior(e) {
+  const selectedOptions = Array.from(courseSelect.selectedOptions).map(opt => opt.value);
+  const allCombined = "All combined";
+  const allSeparate = "All separate";
+  let changed = false;
+
+  // If All combined or All separate is selected, deselect everything else
+  if (selectedOptions.includes(allCombined) && selectedOptions.length > 1) {
+    Array.from(courseSelect.options).forEach(opt => {
+      if (opt.value !== allCombined) opt.selected = false;
+    });
+    changed = true;
+  } else if (selectedOptions.includes(allSeparate) && selectedOptions.length > 1) {
+    Array.from(courseSelect.options).forEach(opt => {
+      if (opt.value !== allSeparate) opt.selected = false;
+    });
+    changed = true;
+  } else if (
+    // If any course is selected (not all combined/separate), deselect those options
+    selectedOptions.some(v => v !== allCombined && v !== allSeparate) &&
+    (selectedOptions.includes(allCombined) || selectedOptions.includes(allSeparate))
+  ) {
+    Array.from(courseSelect.options).forEach(opt => {
+      if (opt.value === allCombined || opt.value === allSeparate) opt.selected = false;
+    });
+    changed = true;
+  }
+
+  // If we changed the selection, re-render and return
+  if (changed) {
+    renderGlossary();
+    return;
+  }
+}
 const searchBar = document.getElementById("search-bar");
 const tableDiv = document.getElementById("glossary-table");
 
@@ -208,7 +242,10 @@ function sendHeightToParent() {
 }
 
 // ---- 7. Attach event listeners ----
-courseSelect.addEventListener("change", renderGlossary);
+courseSelect.addEventListener("change", function(e) {
+  updateCourseSelectBehavior(e);
+  renderGlossary();
+});
 searchBar.addEventListener("input", renderGlossary);
 
 // ---- 8. Initial render ----
