@@ -186,28 +186,60 @@ function renderGlossary() {
       (row[1] && row[1].toString().trim() !== "") &&
       (!searchQuery || row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery)))
     );
-  } else if (selected.includes("All separate")) {
-    headers = [...baseCols, ...courseCols];
-    rows = glossaryData.map(row =>
-      [row.Symbol, ...courseCols.map(c => row[c] || "")]
-    ).filter(row =>
-      hasNonEmptyEntry(row, headers) &&
-      (!searchQuery || row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery)))
-    );
   } else {
-    const selCourses = selected.filter(opt => courseCols.includes(opt));
-    if (!selCourses.length) {
-      tableDiv.innerHTML = `<em>No courses selected.</em>`;
-      sendHeightToParent(); // Also update height if empty
+    // Determine which course columns to use
+    let displayCourses;
+    if (selected.includes("All separate")) {
+      displayCourses = [...courseCols];
+    } else {
+      displayCourses = selected.filter(opt => courseCols.includes(opt));
+    }
+
+    // 1. Find which course columns actually have a match (in ANY row)
+    let matchingCourses = [];
+    if (searchQuery) {
+      for (const c of displayCourses) {
+        if (glossaryData.some(row => row[c] && row[c].toString().toLowerCase().includes(searchQuery))) {
+          matchingCourses.push(c);
+        }
+      }
+    } else {
+      matchingCourses = displayCourses;
+    }
+
+    headers = [...baseCols, ...matchingCourses];
+
+    // 2. Build visible rows
+    rows = glossaryData.map(row => {
+      // Always show base column as it is
+      const baseRow = [row.Symbol || ""];
+      // For course columns: only show value if it matches search (or if no search)
+      const dataRow = matchingCourses.map(c => {
+        const value = row[c] || "";
+        if (searchQuery && !value.toString().toLowerCase().includes(searchQuery)) {
+          return "";
+        }
+        return value;
+      });
+
+      // Row is visible if base column matches search or any displayed course cell matches search
+      const rowMatches = (
+        (!searchQuery) ||
+        (row.Symbol && row.Symbol.toString().toLowerCase().includes(searchQuery)) ||
+        dataRow.some(cell => (cell||"").toString().toLowerCase().includes(searchQuery))
+      );
+      if (!rowMatches) return null;
+
+      // Always show the base column (Symbol), suppress only course cells
+      return [...baseRow, ...dataRow];
+    }).filter(Boolean);
+
+    // If no columns to display, show empty
+    if (headers.length === baseCols.length) {
+      tableDiv.innerHTML = `<em>No results found.</em>`;
+      sendHeightToParent();
       return;
     }
-    headers = [...baseCols, ...selCourses];
-    rows = glossaryData.map(row =>
-      [row.Symbol, ...selCourses.map(c => row[c] || "")]
-    ).filter(row =>
-      hasNonEmptyEntry(row, headers) &&
-      (!searchQuery || row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery)))
-    );
   }
 
   // Render table
