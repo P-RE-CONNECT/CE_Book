@@ -14,12 +14,35 @@
       font-weight: bold;
       margin-bottom: 0.25em;
     }
+    .search-bar-container {
+      position: relative;
+      width: 100%;
+    }
     #search-bar {
       width: 100%;
       min-width: 180px;
       height: 2.4em;
       box-sizing: border-box;
       margin-bottom: 0.5em;
+      padding-right: 2.2em; /* Make space for clear button */
+    }
+    #clear-search {
+      position: absolute;
+      right: 0.2em;
+      top: 50%;
+      transform: translateY(-60%); /* Move upwards a bit more */
+      font-size: 1.2em;
+      line-height: 1em;
+      padding: 0.1em 0.6em;
+      border: none;
+      background: #eee;
+      cursor: pointer;
+      border-radius: 3px;
+      /* Always visible */
+      display: block;
+    }
+    #clear-search:hover {
+      background: #ddd;
     }
     .glossary-table th, .glossary-table td { text-align: left; padding: 4px 8px; }
     .glossary-table { border-collapse: collapse; min-width: 400px; width: max-content; }
@@ -42,7 +65,10 @@
 <body>
 <div class="glossary-controls">
   <label for="search-bar">Search:</label>
-  <input type="text" id="search-bar" placeholder="Search symbol or meaning...">
+  <div class="search-bar-container">
+    <input type="text" id="search-bar" placeholder="Search symbol or meaning...">
+    <button id="clear-search" type="button" title="Clear search" aria-label="Clear search">×</button>
+  </div>
 </div>
 <div id="glossary-table"></div>
 
@@ -54,6 +80,7 @@ const glossaryData = [
 
 // ---- 2. UI Setup ----
 const searchBar = document.getElementById("search-bar");
+const clearBtn = document.getElementById("clear-search");
 const tableDiv = document.getElementById("glossary-table");
 
 // ---- 3. Main render function ----
@@ -85,6 +112,7 @@ function renderGlossary() {
   } else {
     sendHeightToParent();
   }
+  // Button is always visible now; no need to toggle
 }
 
 // ---- 4. Auto-height resize for iframe embedding ----
@@ -102,6 +130,11 @@ function sendHeightToParent() {
 
 // ---- 5. Attach event listeners ----
 searchBar.addEventListener("input", renderGlossary);
+clearBtn.addEventListener("click", function() {
+  searchBar.value = "";
+  renderGlossary();
+  searchBar.focus();
+});
 
 // ---- 6. Initial render ----
 window.addEventListener("DOMContentLoaded", renderGlossary);

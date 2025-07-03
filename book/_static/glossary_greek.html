@@ -36,6 +36,20 @@
       height: 2.4em; /* Approximate height to visually match select */
       box-sizing: border-box;
     }
+
+    #clear-search {
+      font-size: 1.2em;
+      line-height: 1em;
+      padding: 0.1em 0.6em;
+      border: none;
+      background: #eee;
+      cursor: pointer;
+      border-radius: 3px;
+      margin-left: -2.4em; /* optional: tucks the button inside the input */
+    }
+    #clear-search:hover {
+      background: #ddd;
+    }
     /* Responsive for smaller screens */
     @media (max-width: 600px) {
       .glossary-controls {
@@ -81,8 +95,11 @@
   </div>
   <div class="glossary-control-group">
     <label for="search-bar">Search:</label>
-    <input type="text" id="search-bar" placeholder="Search symbol or description...">
-  </div>
+    <div style="display: flex; align-items: center; gap: 0.5em;">
+      <input type="text" id="search-bar" placeholder="Search symbol or description...">
+      <button id="clear-search" type="button" title="Clear search" aria-label="Clear search">×</button>
+    </div>
+</div>
 </div>
 <div id="glossary-table"></div>
 
@@ -290,6 +307,13 @@ searchBar.addEventListener("input", renderGlossary);
 window.addEventListener("DOMContentLoaded", function() {
   renderGlossary();
   sendHeightToParent();
+});
+
+// ---- 9. Clear search button ----
+document.getElementById("clear-search").addEventListener("click", function() {
+  searchBar.value = "";
+  renderGlossary();
+  searchBar.focus();
 });
 </script>
 </body>
