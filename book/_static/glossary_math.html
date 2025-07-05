@@ -30,7 +30,7 @@
       position: absolute;
       right: 0.2em;
       top: 50%;
-      transform: translateY(-60%); /* Move upwards a bit more */
+      transform: translateY(-60%);
       font-size: 1.2em;
       line-height: 1em;
       padding: 0.1em 0.6em;
@@ -38,11 +38,15 @@
       background: #eee;
       cursor: pointer;
       border-radius: 3px;
-      /* Always visible */
       display: block;
     }
     #clear-search:hover {
       background: #ddd;
+    }
+    #export-csv {
+      margin-top: 0.8em;
+      width: fit-content;
+      align-self: flex-start;
     }
     .glossary-table th, .glossary-table td { text-align: left; padding: 4px 8px; }
     .glossary-table { border-collapse: collapse; min-width: 400px; width: max-content; }
@@ -69,19 +73,28 @@
     <input type="text" id="search-bar" placeholder="Search symbol or meaning...">
     <button id="clear-search" type="button" title="Clear search" aria-label="Clear search">×</button>
   </div>
+  <button id="export-csv" type="button">Export as CSV</button>
 </div>
 <div id="glossary-table"></div>
 
 <script>
 // ---- 1. Data ----
 const glossaryData = [
-  {"Symbol":"$\\nabla$","Name":"Nabla","Use":"Gradient"},{"Symbol":"$\\Sigma$","Name":"Sigma","Use":"Sum"},{"Symbol":"$\\prod$","Name":"-","Use":"Product operator"},{"Symbol":"$\\mathbb{N}$","Name":"-","Use":"Natural numbers = {1, 2, 3, \u2026}"},{"Symbol":"$\\mathbb{Z}$","Name":"-","Use":"Integers = {\u2026, -1, 0, 1, \u2026}"},{"Symbol":"$\\mathbb{Q}$","Name":"-","Use":"Rational numbers = {p\/q ; p and q are integers}"},{"Symbol":"$\\mathbb{I}$","Name":"-","Use":"Irrational numbers = {non-rational numbers; $\\sqrt{2}$}"},{"Symbol":"$\\mathbb{R}$","Name":"-","Use":"Real numbers = {All of the above sets}"},{"Symbol":"$\\forall$","Name":"-","Use":"For all"},{"Symbol":"$\\vee$","Name":"-","Use":"Logical or"},{"Symbol":"$\\wedge$","Name":"-","Use":"Logical and"},{"Symbol":"$\\mathcal{O}$","Name":"-","Use":"Big-O notation (order)"},{"Symbol":"$>$","Name":"-","Use":"Greater than"},{"Symbol":"$<$","Name":"-","Use":"Smaller than"},{"Symbol":"$\\gg$","Name":"-","Use":"Much greater than"},{"Symbol":"$\\ll$","Name":"-","Use":"Much smaller than"},{"Symbol":"$!$","Name":"-","Use":"Factorial"},{"Symbol":"$\\equiv$","Name":"-","Use":"Is identical to"},{"Symbol":"$\\in$","Name":"-","Use":"Is an element of"},{"Symbol":"$\\ni$","Name":"-","Use":"Contains"},{"Symbol":"$\\propto$","Name":"-","Use":"Is proportionate to"},{"Symbol":"$\\exists$","Name":"-","Use":"There exists"},{"Symbol":"$\\nexists$","Name":"-","Use":"There does not exist"},{"Symbol":"$\\approx$","Name":"-","Use":"Approximately equal to"},{"Symbol":"$\\perp$","Name":"-","Use":"Perpendicular\/orthogonal"},{"Symbol":"$\\cap$","Name":"-","Use":"Intersect"},{"Symbol":"$\\cup$","Name":"-","Use":"Union"},{"Symbol":"$\\infty$","Name":"-","Use":"Infinity"}
+  {"Symbol":"$\\nabla$","Name":"Nabla","Use":"Gradient"},{"Symbol":"$\\Sigma$","Name":"Sigma","Use":"Sum"},{"Symbol":"$\\prod$","Name":"-","Use":"Product operator"},{"Symbol":"$\\mathbb{N}$","Name":"-","Use":"Natural numbers = {1, 2, 3, \u2026}"},{"Symbol":"$\\mathbb{Z}$","Name":"-","Use":"Integers = {\u2026, -1, 0, 1, \u2026}"},{"Symbol":"$\\mathbb{Q}$","Name":"-","Use":"Rational numbers = {p\/q ; p and q are integers}"},{"Symbol":"$\\mathbb{I}$","Name":"-","Use":"Irrational numbers = {non-rational numbers; $\\sqrt{2}$}"},{"Symbol":"$\\mathbb{R}$","Name":"-","Use":"Real numbers = {All of the above sets}"},{"Symbol":"$\\forall$","Name":"-","Use":"For all"},{"Symbol":"$\\vee$","Name":"-","Use":"Logical or"},{"Symbol":"$\\wedge$","Name":"-","Use":"Logical and"},{"Symbol":"$\\mathcal{O}$","Name":"-","Use":"Big-O notation (order)"},{"Symbol":">","Name":"-","Use":"Greater than"},{"Symbol":"<","Name":"-","Use":"Smaller than"},{"Symbol":"$\\gg$","Name":"-","Use":"Much greater than"},{"Symbol":"$\\ll$","Name":"-","Use":"Much smaller than"},{"Symbol":"!","Name":"-","Use":"Factorial"},{"Symbol":"$\\equiv$","Name":"-","Use":"Is identical to"},{"Symbol":"$\\in$","Name":"-","Use":"Is an element of"},{"Symbol":"$\\ni$","Name":"-","Use":"Contains"},{"Symbol":"$\\propto$","Name":"-","Use":"Is proportionate to"},{"Symbol":"$\\exists$","Name":"-","Use":"There exists"},{"Symbol":"$\\nexists$","Name":"-","Use":"There does not exist"},{"Symbol":"$\\approx$","Name":"-","Use":"Approximately equal to"},{"Symbol":"$\\perp$","Name":"-","Use":"Perpendicular\/orthogonal"},{"Symbol":"$\\cap$","Name":"-","Use":"Intersect"},{"Symbol":"$\\cup$","Name":"-","Use":"Union"},{"Symbol":"$\\infty$","Name":"-","Use":"Infinity"}
 ];
 
 // ---- 2. UI Setup ----
 const searchBar = document.getElementById("search-bar");
 const clearBtn = document.getElementById("clear-search");
+const exportBtn = document.getElementById("export-csv");
 const tableDiv = document.getElementById("glossary-table");
+
+// ---- Highlight search term ----
+function highlight(text, query) {
+  if (!query) return text;
+  const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
 
 // ---- 3. Main render function ----
 function renderGlossary() {
@@ -95,11 +108,11 @@ function renderGlossary() {
     );
 
   let html = "<table class='glossary-table'><thead><tr>";
-  headers.forEach(h => html += `<th>${h}</th>`);
+  headers.forEach(h => html += `<th>${h}</th>`); // no highlight on header
   html += "</tr></thead><tbody>";
   rows.forEach(r => {
     html += "<tr>";
-    r.forEach(cell => html += `<td>${cell || ""}</td>`);
+    r.forEach(cell => html += `<td>${highlight(cell || "", searchQuery)}</td>`);
     html += "</tr>";
   });
   html += "</tbody></table>";
@@ -112,8 +125,31 @@ function renderGlossary() {
   } else {
     sendHeightToParent();
   }
-  // Button is always visible now; no need to toggle
 }
+
+// ---- Export as CSV ----
+exportBtn.addEventListener("click", function() {
+  const table = document.querySelector(".glossary-table");
+  if (!table) return;
+  let csv = "";
+  // Headers
+  const ths = table.querySelectorAll("thead th");
+  csv += Array.from(ths).map(th => `"${(th.innerText||"").replace(/"/g,'""')}"`).join(",") + "\n";
+  // Rows
+  const trs = table.querySelectorAll("tbody tr");
+  trs.forEach(tr => {
+    const tds = tr.querySelectorAll("td");
+    csv += Array.from(tds).map(td => `"${(td.innerText||"").replace(/"/g,'""')}"`).join(",") + "\n";
+  });
+  // Download
+  const blob = new Blob([csv], {type: "text/csv"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "math-glossary.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+});
 
 // ---- 4. Auto-height resize for iframe embedding ----
 function sendHeightToParent() {
