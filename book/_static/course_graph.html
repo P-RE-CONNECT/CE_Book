@@ -199,25 +199,31 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     function sendHeight() {
-      const height = document.documentElement.scrollHeight;
-      parent.postMessage({ type: 'setHeight', height: height }, '*');
+      // Wait a bit for rendering/layout changes
+      setTimeout(function() {
+        // Use body height which includes SVG and info
+        const height = document.body.scrollHeight;
+        parent.postMessage({ type: 'setHeight', height: height }, '*');
+      }, 0);
     }
 
     window.addEventListener('load', sendHeight);
-    window.addEventListener('click', sendHeight);
+    window.addEventListener('resize', sendHeight);
 
+    // Layout settings
     const blockWidth = 100;
     const blockHeight = 50;
     const spacing = 50;
     const blockCount = 3;
-    const svgWidth = window.innerWidth;
-    const svgHeight = 120;
+    const marginTop = 50;
+    const svgWidth = Math.max(400, window.innerWidth);
+    const svgHeight = blockHeight + marginTop + 20;
     const startX = (svgWidth - ((blockWidth * blockCount) + (spacing * (blockCount - 1)))) / 2;
 
     const blocks = [
-      { id: "block1", x: startX, y: 50, text: "CM1" },
-      { id: "block2", x: startX + blockWidth + spacing, y: 50, text: "CM2" },
-      { id: "block3", x: startX + 2 * (blockWidth + spacing), y: 50, text: "CM3" }
+      { id: "block1", x: startX, y: marginTop, text: "CM1" },
+      { id: "block2", x: startX + blockWidth + spacing, y: marginTop, text: "CM2" },
+      { id: "block3", x: startX + 2 * (blockWidth + spacing), y: marginTop, text: "CM3" }
     ];
 
     const arrows = [
@@ -341,10 +347,12 @@
 
     };
 
+    // Create SVG with explicit height
     const svg = d3.select("body")
       .append("svg")
       .attr("width", svgWidth)
-      .attr("height", svgHeight);
+      .attr("height", svgHeight)
+      .style("display", "block");
 
     const info = d3.select("body")
       .append("div")
@@ -364,7 +372,6 @@
       .attr("points", "0 0, 10 3.5, 0 7")
       .attr("fill", "black");
 
-    // Clear borders function
     function clearBorders() {
       d3.selectAll("rect").attr("stroke", "none");
       d3.selectAll("line").attr("stroke", "black");
@@ -419,8 +426,9 @@
           clearBorders();
           d3.select(`#${arrow.id}`).attr("stroke", "red").attr("stroke-width", 2);
           info.html(detailedInfo[arrow.id]);
+          sendHeight();
         });
-        
+
       svg.append("line")
         .attr("id", arrow.id)
         .attr("x1", arrow.x1)
@@ -431,6 +439,13 @@
         .attr("stroke-width", 2)
         .attr("marker-end", "url(#arrowhead)")
     });
+
+    // MutationObserver for info div (extra robust, catches all content changes)
+    const infoNode = document.getElementById('info');
+    const observer = new MutationObserver(() => {
+      sendHeight();
+    });
+    observer.observe(infoNode, { childList: true, subtree: true });
 
   </script>
 </body>

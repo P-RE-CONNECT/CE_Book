@@ -12,10 +12,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      /* flex: 1 1 0; */
       min-width: 200px;
-      /* display: block; */
-      /* min-width: 200px; */
     }
     .glossary-control-group label {
       margin-bottom: 0.5em;
@@ -26,17 +23,15 @@
       min-width: 180px;
       max-width: 100%;
       height: 18em;
-      /* Make select box and input the same height */
       box-sizing: border-box;
     }
     #search-bar {
       width: 300px;
       min-width: 180px;
       max-width: 100%;
-      height: 2.4em; /* Approximate height to visually match select */
+      height: 2.4em;
       box-sizing: border-box;
     }
-
     #clear-search {
       font-size: 1.2em;
       line-height: 1em;
@@ -45,16 +40,16 @@
       background: #eee;
       cursor: pointer;
       border-radius: 3px;
-      margin-left: -2.4em; /* optional: tucks the button inside the input */
+      margin-left: -2.4em;
     }
     #clear-search:hover {
       background: #ddd;
     }
-
-    #export-csv {
+    .export-buttons {
+      display: flex;
+      gap: 0.8em;
       margin-top: 0.8em;
     }
-    /* Responsive for smaller screens */
     @media (max-width: 600px) {
       .glossary-controls {
         flex-direction: column;
@@ -90,6 +85,8 @@
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="glossary-controls">
@@ -103,19 +100,22 @@
       <input type="text" id="search-bar" placeholder="Search symbol or description...">
       <button id="clear-search" type="button" title="Clear search" aria-label="Clear search">×</button>
     </div>
-    <button id="export-csv" type="button">Export as CSV</button>
+    <div class="export-buttons">
+      <button id="export-csv" type="button">Export as CSV</button>
+      <button id="export-pdf" type="button">Export as PDF</button>
+    </div>
   </div>
 </div>
 <div id="glossary-table"></div>
 
 <script>
-// ---- 1. Paste your JSON data here ----
+// ---- 1. Data ----
 const glossaryData = [
   {"Symbol":"$\\alpha$","Name":"alpha","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Thermal expansion coefficient, emperical base factor","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Correction factor","Stedelijk Water en Milieutechniek":"Angle","Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Thermal expansion coefficient","Beton & Staalconstructies":"Shape factor, reduction factor","Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wiskunde":null,"Waterbouwkunde":null,"Hydrologie":"Drainage parameter"},{"Symbol":"$\\beta$","Name":"beta","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Factor for enlarged pile bases","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Reliability index","Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\gamma$","Name":"gamma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Shear angle","Ontwerpen van Constructies & Funderingen 1":"Bulk unit weight","Transport & Planning":null,"Differentiaalvergelijkingen":"Friction constant","Vloeistofmechanica":"Shear angle","Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":"Confidence level","Constructie Mechanica 3":null,"Beton & Staalconstructies":"Partial factor","Dynamica van Systemen":null,"Grondmechanica":"Weight","Ontwerpen van Constructies & Funderingen 2":"Weight","Numerieke Wisunde":null,"Waterbouwkunde":"Reduction factor","Hydrologie":"Psychrometer constant"},{"Symbol":"$\\dot{\\gamma}$","Name":"gamma dot","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Shear rate","Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\delta$","Name":"delta","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Interface friction angle between the soil and pile","Transport & Planning":null,"Differentiaalvergelijkingen":"Dirac delta function","Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Displacement","Dynamica van Systemen":"Dirac delta function","Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\delta \\theta$","Name":"delta theta","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Virtual rotation","Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\Delta$","Name":"Delta","Analyse":"Difference","Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\varepsilon$","Name":"epsilon","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":"Strain","Bouwmaterialen & Milieu":"Strain","Ontwerpen van Constructies & Funderingen 1":"Strain","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Strain","Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":"Strain","Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":"Error term","Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$E$","Name":"Epsilon","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":"Young's modulus","Bouwmaterialen & Milieu":"Young's modulus","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$E_{\\lambda}$","Name":"Epsilon_lambda","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Eigenspace","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\zeta$","Name":"zeta","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":"Damping ratio","Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Water level","Hydrologie":null},{"Symbol":"$\\eta$","Name":"eta","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Dynamic viscosity, efficiency","Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Efficiency","Hydrologie":"Porosity"},{"Symbol":"$\\theta$","Name":"theta","Analyse":"(polar) angle (argument of z)","Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":"Angle","Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Angle","Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Rotation","Beton & Staalconstructies":"Angle","Dynamica van Systemen":"Angle","Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Stream parameter, angle","Hydrologie":null},{"Symbol":"$\\dot{\\theta}$","Name":"theta dot","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\ddot{\\theta}$","Name":"theta double dot","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\kappa$","Name":"kappa","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":"Curvature","Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Curvature","Beton & Staalconstructies":"Curvature","Dynamica van Systemen":null,"Grondmechanica":"Intrinsic permeability","Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\lambda$","Name":"lambda","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Eigenvalue","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Slenderness","Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":"Stability parameter, eigenvalue","Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\lambda_w$","Name":"lambda_w","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":"Heat\/enthalpy of vaporization"},{"Symbol":"$\\mu$","Name":"mu","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Mean","Transport & Planning":"Sensitivity","Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Factor for area change (Carnot)","Stedelijk Water en Milieutechniek":"Dynamic viscosity, specific growth rate","Kansrekening & Statistiek":"Mean","Constructie Mechanica 3":null,"Beton & Staalconstructies":"Mean","Dynamica van Systemen":null,"Grondmechanica":"Dynamic viscosity","Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Dynamic viscosity, factor for area change (carnot)","Hydrologie":"Storage coefficient"},{"Symbol":"$\\nu$","Name":"nu","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Poisson's ratio","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Kinematic viscosity","Stedelijk Water en Milieutechniek":"Kinematic viscosity","Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Poisson's ratio","Dynamica van Systemen":null,"Grondmechanica":"Poisson's ratio","Ontwerpen van Constructies & Funderingen 2":"Poisson's ratio","Numerieke Wisunde":null,"Waterbouwkunde":"Kinematic viscosity","Hydrologie":null},{"Symbol":"$\\xi$","Name":"xi","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":"Error term","Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\rho$","Name":"rho","Analyse":"Density","Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Density","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":"Mass per unit length","Vloeistofmechanica":"Density","Stedelijk Water en Milieutechniek":"Density","Kansrekening & Statistiek":"Correlation","Constructie Mechanica 3":null,"Beton & Staalconstructies":"Density, reinforcement ratio","Dynamica van Systemen":"Density","Grondmechanica":"Density","Ontwerpen van Constructies & Funderingen 2":"Reinforcement ratio","Numerieke Wisunde":null,"Waterbouwkunde":"Density","Hydrologie":"Density"},{"Symbol":"$\\sigma$","Name":"sigma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":"Stress","Bouwmaterialen & Milieu":"Phase strength","Ontwerpen van Constructies & Funderingen 1":"Stress, standard deviation","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":"Standard deviation","Constructie Mechanica 3":"Normal stress","Beton & Staalconstructies":"Standard deviation, normal stress","Dynamica van Systemen":null,"Grondmechanica":"Total stress","Ontwerpen van Constructies & Funderingen 2":"Stress","Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\sigma'$","Name":"sigma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Stress at crack tip","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":"Effective stress","Ontwerpen van Constructies & Funderingen 2":"Effective stress","Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\sigma^2$","Name":"sigma squared","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":"Variance","Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\sigma_o$","Name":"sigma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":"Stress applied on the surface","Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\sigma_v$","Name":"sigma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Total vertical stress","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\sigma_v'$","Name":"sigma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Vertical effective stress","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\sigma_{vf}'$","Name":"sigma","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":"Final vertical effective stress","Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\tau$","Name":"tau","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":"Shear stress","Bouwmaterialen & Milieu":"Shear stress","Ontwerpen van Constructies & Funderingen 1":"Shear stress","Transport & Planning":"Angular rotation","Differentiaalvergelijkingen":null,"Vloeistofmechanica":"Shear stress","Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Shear stress","Beton & Staalconstructies":"Shear stress","Dynamica van Systemen":null,"Grondmechanica":"Shear stress","Ontwerpen van Constructies & Funderingen 2":"Shear stress","Numerieke Wisunde":"Local error","Waterbouwkunde":"Bottom friction","Hydrologie":null},{"Symbol":"$\\tau_f$","Name":"tau","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Failure shear stress","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":"Failure shear stress","Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\varphi$","Name":"phi","Analyse":"Azimuthal angle","Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":"Angle","Constructie Mechanica 2":"Rotation","Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":"Rotation","Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\varphi_0$","Name":"phi","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":"Natural phase","Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\phi$","Name":"phi","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":"Angle of internal friction","Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Reinforcement diameter","Dynamica van Systemen":null,"Grondmechanica":"Potential, friction angle","Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Transport parameter","Hydrologie":null},{"Symbol":"$\\phi'$","Name":"phi","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":"Friction angle","Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\chi$","Name":"chi","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Reduction factor","Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\psi$","Name":"psi","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":"Combination factor","Dynamica van Systemen":null,"Grondmechanica":"Stream function","Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Shields parameter","Hydrologie":null},{"Symbol":"$\\omega$","Name":"omega","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":"Shock wave speed","Differentiaalvergelijkingen":"Angular frequency","Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":"Frequency","Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":"Angular frequency","Hydrologie":null},{"Symbol":"$\\omega_0$","Name":"omega","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":null,"Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":"Natural frequency","Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null},{"Symbol":"$\\Omega$","Name":"Omega","Analyse":null,"Constructie Mechanica 1":null,"Inleiding Civiele & Milieutechniek":null,"Schone Watersystemen":null,"Integraal Ontwerpen":null,"Lineaire Algebra":null,"Constructie Mechanica 2":null,"Bouwmaterialen & Milieu":null,"Ontwerpen van Constructies & Funderingen 1":null,"Transport & Planning":null,"Differentiaalvergelijkingen":null,"Vloeistofmechanica":null,"Stedelijk Water en Milieutechniek":null,"Kansrekening & Statistiek":"Sample space","Constructie Mechanica 3":null,"Beton & Staalconstructies":null,"Dynamica van Systemen":null,"Grondmechanica":null,"Ontwerpen van Constructies & Funderingen 2":null,"Numerieke Wisunde":null,"Waterbouwkunde":null,"Hydrologie":null}
   // ... (rest of your entries)
 ];
 
-// ---- 2. Get all course columns (excluding Symbol and Description) ----
+// ---- 2. Get all course columns (excluding Symbol and Name) ----
 const allColumns = Object.keys(glossaryData[0] || {});
 const baseCols = ["Symbol", "Name"];
 const courseCols = allColumns.filter(c => !baseCols.includes(c));
@@ -128,7 +128,6 @@ function updateCourseSelectBehavior(e) {
   const allSeparate = "All separate";
   let changed = false;
 
-  // If All combined or All separate is selected, deselect everything else
   if (selectedOptions.includes(allCombined) && selectedOptions.length > 1) {
     Array.from(courseSelect.options).forEach(opt => {
       if (opt.value !== allCombined) opt.selected = false;
@@ -140,7 +139,6 @@ function updateCourseSelectBehavior(e) {
     });
     changed = true;
   } else if (
-    // If any course is selected (not all combined/separate), deselect those options
     selectedOptions.some(v => v !== allCombined && v !== allSeparate) &&
     (selectedOptions.includes(allCombined) || selectedOptions.includes(allSeparate))
   ) {
@@ -150,7 +148,6 @@ function updateCourseSelectBehavior(e) {
     changed = true;
   }
 
-  // If we changed the selection, re-render and return
   if (changed) {
     renderGlossary();
     return;
@@ -164,7 +161,6 @@ const options = [];
 options.push("All combined");
 options.push("All separate");
 courseCols.forEach(c => options.push(c));
-// Set default selection
 courseSelect.innerHTML = options.map(opt =>
   `<option value="${opt}"${opt === "All separate" ? ' selected' : ''}>${opt}</option>`
 ).join("");
@@ -200,79 +196,86 @@ function highlight(text, query) {
   return text.replace(re, '<mark>$1</mark>');
 }
 
-function hasNonEmptyEntry(row, headers, minColIdx=2) {
-  for (let i = minColIdx; i < headers.length; ++i) {
-    if (row[i] && row[i].toString().trim() !== "") return true;
-  }
-  return false;
-}
-
 // ---- 5. Main render function ----
 function renderGlossary() {
   const selected = Array.from(courseSelect.selectedOptions).map(o => o.value);
   const searchQuery = searchBar.value.trim().toLowerCase();
 
-  // Show "All combined" if selected
+  let headers, rows, activeCourseCols = [];
+
   if (selected.includes("All combined")) {
-    // ... your existing All combined logic ...
-    return;
-  }
-
-  // Figure out which course columns to display
-  let courseColsToDisplay;
-  if (selected.includes("All separate")) {
-    courseColsToDisplay = [...courseCols];
-  } else {
-    courseColsToDisplay = selected.filter(opt => courseCols.includes(opt));
-  }
-
-  // Only show course columns that have at least one non-empty cell in any row
-  let activeCourseCols;
-  if (searchQuery) {
-    activeCourseCols = courseColsToDisplay.filter(col =>
-      glossaryData.some(row =>
-        row[col] &&
-        row[col].toString().trim() !== "" &&
-        row[col].toString().toLowerCase().includes(searchQuery)
-      )
-    );
-  } else {
-    activeCourseCols = courseColsToDisplay.filter(col =>
+    // Only use courses with at least one non-empty value
+    activeCourseCols = courseCols.filter(col =>
       glossaryData.some(row => row[col] && row[col].toString().trim() !== "")
     );
-  }
-
-  // Build visible rows: only those with a non-empty entry in at least one selected course column
-  let visibleRows = glossaryData.filter(row =>
-    activeCourseCols.some(col => row[col] && row[col].toString().trim() !== "")
-  );
-
-  // Further filter by search if needed
-  if (searchQuery) {
-    visibleRows = visibleRows.filter(row =>
-      [row.Symbol, row.Name, ...activeCourseCols.map(col => row[col] || "")]
-        .some(cell => (cell || "").toString().toLowerCase().includes(searchQuery))
+    headers = [...baseCols, "All combined"];
+    rows = glossaryData.map(row => {
+      const combined = combineAndDedup(row, activeCourseCols);
+      return [row.Symbol, row.Name, combined];
+    }).filter(row =>
+      (row[2] && row[2].toString().trim() !== "") &&
+      (!searchQuery || row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery)))
     );
+  } else {
+    // "All separate" or custom selected
+    let displayCourses;
+    if (selected.includes("All separate")) {
+      displayCourses = [...courseCols];
+    } else {
+      displayCourses = selected.filter(opt => courseCols.includes(opt));
+    }
+
+    // Only show course columns that have at least one non-empty cell in any row
+    if (searchQuery) {
+      activeCourseCols = displayCourses.filter(col =>
+        glossaryData.some(row =>
+          row[col] &&
+          row[col].toString().trim() !== "" &&
+          row[col].toString().toLowerCase().includes(searchQuery)
+        )
+      );
+    } else {
+      activeCourseCols = displayCourses.filter(col =>
+        glossaryData.some(row => row[col] && row[col].toString().trim() !== "")
+      );
+    }
+
+    // Only show rows where at least one active course column is non-empty
+    rows = glossaryData.filter(row =>
+      activeCourseCols.some(col => row[col] && row[col].toString().trim() !== "")
+    ).map(row => {
+      const baseRow = [row.Symbol || "", row.Name || ""];
+      const dataRow = activeCourseCols.map(c => row[c] || "");
+      // Row is visible if Symbol, Name, or any displayed course cell matches search
+      const rowMatches = (
+        (!searchQuery) ||
+        (row.Symbol && row.Symbol.toString().toLowerCase().includes(searchQuery)) ||
+        (row.Name && row.Name.toString().toLowerCase().includes(searchQuery)) ||
+        dataRow.some(cell => (cell||"").toString().toLowerCase().includes(searchQuery))
+      );
+      if (!rowMatches) return null;
+      return [...baseRow, ...dataRow];
+    }).filter(Boolean);
+
+    headers = [...baseCols, ...activeCourseCols];
   }
 
-  // If no active course columns, show "No results found"
-  if (activeCourseCols.length === 0 || visibleRows.length === 0) {
+  // Make activeCourseCols available globally for export
+  window.activeCourseCols = activeCourseCols || [];
+
+  if (headers.length === baseCols.length || !rows || rows.length === 0) {
     tableDiv.innerHTML = `<em>No results found.</em>`;
     sendHeightToParent();
     return;
   }
 
-  // Build table
-  let headers = ["Symbol", "Name", ...activeCourseCols];
+  // Render table
   let html = "<table class='glossary-table'><thead><tr>";
   headers.forEach(h => html += `<th>${h}</th>`);
   html += "</tr></thead><tbody>";
-  visibleRows.forEach(row => {
+  rows.forEach(r => {
     html += "<tr>";
-    html += `<td>${highlight(row.Symbol || "", searchQuery)}</td><td>${highlight(row.Name || "", searchQuery)}</td>`;
-    activeCourseCols.forEach(col => {
-      html += `<td>${highlight(row[col] || "", searchQuery)}</td>`;
-    });
+    r.forEach(cell => html += `<td>${highlight(cell || "", searchQuery)}</td>`);
     html += "</tr>";
   });
   html += "</tbody></table>";
@@ -281,31 +284,96 @@ function renderGlossary() {
   sendHeightToParent();
 }
 
+// ---- 6. Export as CSV and PDF ----
+function getExportCourseCode() {
+  if (window.activeCourseCols && window.activeCourseCols.length) {
+    if (window.activeCourseCols.length > 3) {
+      return "multiple";
+    } else {
+      return window.activeCourseCols.map(c => c.slice(0, 3)).join('_').toLowerCase();
+    }
+  } else {
+    return "all";
+  }
+}
+
+function getExportCourseTitle() {
+  if (window.activeCourseCols && window.activeCourseCols.length) {
+    if (window.activeCourseCols.length > 3) {
+      return "Courses: multiple";
+    } else {
+      return "Courses: " + window.activeCourseCols.join(', ');
+    }
+  } else {
+    return "Courses: all";
+  }
+}
+
 document.getElementById("export-csv").addEventListener("click", function() {
-  // Find the current headers and rows as shown in the table
   const table = document.querySelector(".glossary-table");
   if (!table) return;
   let csv = "";
-  // Headers
   const ths = table.querySelectorAll("thead th");
   csv += Array.from(ths).map(th => `"${(th.innerText||"").replace(/"/g,'""')}"`).join(",") + "\n";
-  // Rows
   const trs = table.querySelectorAll("tbody tr");
   trs.forEach(tr => {
     const tds = tr.querySelectorAll("td");
     csv += Array.from(tds).map(td => `"${(td.innerText||"").replace(/"/g,'""')}"`).join(",") + "\n";
   });
-  // Download
   const blob = new Blob([csv], {type: "text/csv"});
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "greek-glossary.csv";
+  a.download = `greek_glossary_${getExportCourseCode()}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 });
 
-// ---- 6. Auto-height resize for iframe embedding ----
+document.getElementById("export-pdf").addEventListener("click", function() {
+  const table = document.querySelector(".glossary-table");
+  if (!table) return;
+  html2canvas(table, {scale: 2}).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new window.jspdf.jsPDF({
+      orientation: 'landscape',
+      unit: 'pt',
+      format: 'a4'
+    });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    // Title settings
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(12);
+    const title = getExportCourseTitle();
+    const textWidth = pdf.getTextWidth(title);
+    const x = (pageWidth - textWidth) / 2;
+    const titleHeight = 36; // Y position for the title
+    pdf.text(title, x, titleHeight);
+
+    // Calculate available space for image
+    const yStart = 50; // Leave some space for the title
+    const availableWidth = pageWidth - 40;
+    const availableHeight = pageHeight - yStart - 20;
+
+    // Calculate scale to fit both width and height
+    const scale = Math.min(
+      availableWidth / canvas.width,
+      availableHeight / canvas.height
+    );
+    const imgWidth = canvas.width * scale;
+    const imgHeight = canvas.height * scale;
+
+    // Center image horizontally if needed
+    const imgX = 20 + (availableWidth - imgWidth) / 2;
+
+    pdf.addImage(imgData, 'PNG', imgX, yStart, imgWidth, imgHeight);
+
+    pdf.save(`greek_glossary_${getExportCourseCode()}.pdf`);
+  });
+});
+
+// ---- 7. Auto-height resize for iframe embedding ----
 function sendHeightToParent() {
   if (window.parent !== window) {
     var extraPadding = 20;
@@ -318,20 +386,16 @@ function sendHeightToParent() {
   }
 }
 
-// ---- 7. Attach event listeners ----
+// ---- 8. Attach event listeners ----
 courseSelect.addEventListener("change", function(e) {
   updateCourseSelectBehavior(e);
   renderGlossary();
 });
 searchBar.addEventListener("input", renderGlossary);
-
-// ---- 8. Initial render ----
 window.addEventListener("DOMContentLoaded", function() {
   renderGlossary();
   sendHeightToParent();
 });
-
-// ---- 9. Clear search button ----
 document.getElementById("clear-search").addEventListener("click", function() {
   searchBar.value = "";
   renderGlossary();
