@@ -286,6 +286,12 @@ function renderGlossary() {
 
 // ---- 6. Export as CSV and PDF ----
 function getExportCourseCode() {
+  // Get the current selection options (by value, not label)
+  const selected = Array.from(document.getElementById("course-select").selectedOptions).map(o => o.value);
+  if (selected.length === 1) {
+    if (selected[0] === "All combined") return "all_com";
+    if (selected[0] === "All separate") return "all_sep";
+  }
   if (window.activeCourseCols && window.activeCourseCols.length) {
     if (window.activeCourseCols.length > 3) {
       return "multiple";
@@ -298,14 +304,20 @@ function getExportCourseCode() {
 }
 
 function getExportCourseTitle() {
+  // Get the current selection options (by value, not label)
+  const selected = Array.from(document.getElementById("course-select").selectedOptions).map(o => o.value);
+  if (selected.length === 1) {
+    if (selected[0] === "All combined") return "Greek Glossary of courses: all combined";
+    if (selected[0] === "All separate") return "Greek Glossary of courses: all separate";
+  }
   if (window.activeCourseCols && window.activeCourseCols.length) {
     if (window.activeCourseCols.length > 3) {
-      return "Courses: multiple";
+      return "Greek Glossary of courses: multiple";
     } else {
-      return "Courses: " + window.activeCourseCols.join(', ');
+      return "Greek Glossary of courses: " + window.activeCourseCols.join(', ');
     }
   } else {
-    return "Courses: all";
+    return "Greek Glossary of courses: all";
   }
 }
 

@@ -634,6 +634,12 @@ function renderGlossary() {
 
 // ---- 6. Export helpers ----
 function getExportCourseCode() {
+  // Get the current selection options (by value, not label)
+  const selected = Array.from(document.getElementById("course-select").selectedOptions).map(o => o.value);
+  if (selected.length === 1) {
+    if (selected[0] === "All combined") return "all_com";
+    if (selected[0] === "All separate") return "all_sep";
+  }
   if (window.activeCourseCols && window.activeCourseCols.length) {
     if (window.activeCourseCols.length > 3) {
       return "multiple";
@@ -645,16 +651,20 @@ function getExportCourseCode() {
   }
 }
 function getExportCourseTitle() {
+  // Get the current selection options (by value, not label)
+  const selected = Array.from(document.getElementById("course-select").selectedOptions).map(o => o.value);
+  if (selected.length === 1) {
+    if (selected[0] === "All combined") return "Latin glossary of courses: all combined";
+    if (selected[0] === "All separate") return "Latin glossary of courses: all separate";
+  }
   if (window.activeCourseCols && window.activeCourseCols.length) {
     if (window.activeCourseCols.length > 3) {
-      return "Courses: multiple";
-    } else if (window.activeCourseCols.length === 0) {
-      return "Courses: all";
+      return "Latin glossary of courses: multiple";
     } else {
-      return "Courses: " + window.activeCourseCols.join(', ');
+      return "Latin glossary of courses: " + window.activeCourseCols.join(', ');
     }
   } else {
-    return "Courses: all";
+    return "Latin glossary of courses: all";
   }
 }
 
