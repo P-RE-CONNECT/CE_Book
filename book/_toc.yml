@@ -10,7 +10,7 @@ parts:
     - file: route_60.md
     - file: glossary/interactive_glossary.ipynb
 
-  - caption: Constructionmechanica
+  - caption: Constructiemechanica
     chapters:
     - file: construction_mechanics/construction_mechanics.md
     - file: construction_mechanics/cm1/cm1.md
