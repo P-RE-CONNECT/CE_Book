@@ -555,7 +555,11 @@ function renderGlossary() {
       return [row[baseCol], combined];
     }).filter(row =>
       (row[1] && row[1].toString().trim() !== "") &&
-      (!searchQuery || row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery)))
+      (
+        !searchQuery ||
+        // Only search in columns after the first (baseCol)
+        row.slice(1).some(cell => (cell||'').toString().toLowerCase().includes(searchQuery))
+      )
     );
   } else {
     let displayCourses;
@@ -590,9 +594,9 @@ function renderGlossary() {
         }
         return value;
       });
+      // Only search in columns after the first (baseCol)
       const rowMatches = (
         (!searchQuery) ||
-        (row[baseCol] && row[baseCol].toString().toLowerCase().includes(searchQuery)) ||
         dataRow.some(cell => (cell||"").toString().toLowerCase().includes(searchQuery))
       );
       if (!rowMatches) return null;
@@ -602,7 +606,6 @@ function renderGlossary() {
     headers = [baseCol, ...activeCourseCols];
   }
 
-  // Make activeCourseCols available globally for export
   window.activeCourseCols = activeCourseCols || [];
 
   if (headers.length === 1 || !rows || rows.length === 0) {
@@ -611,13 +614,19 @@ function renderGlossary() {
     return;
   }
 
-  // Render table with highlight
+  // Render table with highlight (but not on the first column)
   let html = "<table class='glossary-table'><thead><tr>";
   headers.forEach(h => html += `<th>${h}</th>`);
   html += "</tr></thead><tbody>";
   rows.forEach(r => {
     html += "<tr>";
-    r.forEach(cell => html += `<td>${highlight(cell || "", searchQuery)}</td>`);
+    r.forEach((cell, idx) => {
+      if (idx === 0) {
+        html += `<td>${cell || ""}</td>`;
+      } else {
+        html += `<td>${highlight(cell || "", searchQuery)}</td>`;
+      }
+    });
     html += "</tr>";
   });
   html += "</tbody></table>";

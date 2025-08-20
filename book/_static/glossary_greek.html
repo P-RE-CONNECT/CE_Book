@@ -204,7 +204,6 @@ function renderGlossary() {
   let headers, rows, activeCourseCols = [];
 
   if (selected.includes("All combined")) {
-    // Only use courses with at least one non-empty value
     activeCourseCols = courseCols.filter(col =>
       glossaryData.some(row => row[col] && row[col].toString().trim() !== "")
     );
@@ -214,10 +213,13 @@ function renderGlossary() {
       return [row.Symbol, row.Name, combined];
     }).filter(row =>
       (row[2] && row[2].toString().trim() !== "") &&
-      (!searchQuery || row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery)))
+      (
+        !searchQuery ||
+        // Only search in Name and All combined columns
+        row.slice(1).some(cell => (cell||'').toString().toLowerCase().includes(searchQuery))
+      )
     );
   } else {
-    // "All separate" or custom selected
     let displayCourses;
     if (selected.includes("All separate")) {
       displayCourses = [...courseCols];
@@ -225,7 +227,6 @@ function renderGlossary() {
       displayCourses = selected.filter(opt => courseCols.includes(opt));
     }
 
-    // Only show course columns that have at least one non-empty cell in any row
     if (searchQuery) {
       activeCourseCols = displayCourses.filter(col =>
         glossaryData.some(row =>
@@ -240,16 +241,14 @@ function renderGlossary() {
       );
     }
 
-    // Only show rows where at least one active course column is non-empty
     rows = glossaryData.filter(row =>
       activeCourseCols.some(col => row[col] && row[col].toString().trim() !== "")
     ).map(row => {
       const baseRow = [row.Symbol || "", row.Name || ""];
       const dataRow = activeCourseCols.map(c => row[c] || "");
-      // Row is visible if Symbol, Name, or any displayed course cell matches search
+      // Only search in Name and dataRow (not Symbol)
       const rowMatches = (
         (!searchQuery) ||
-        (row.Symbol && row.Symbol.toString().toLowerCase().includes(searchQuery)) ||
         (row.Name && row.Name.toString().toLowerCase().includes(searchQuery)) ||
         dataRow.some(cell => (cell||"").toString().toLowerCase().includes(searchQuery))
       );
@@ -260,7 +259,6 @@ function renderGlossary() {
     headers = [...baseCols, ...activeCourseCols];
   }
 
-  // Make activeCourseCols available globally for export
   window.activeCourseCols = activeCourseCols || [];
 
   if (headers.length === baseCols.length || !rows || rows.length === 0) {
@@ -269,13 +267,20 @@ function renderGlossary() {
     return;
   }
 
-  // Render table
+  // --- TABLE RENDER: Don't highlight the Symbol column ---
   let html = "<table class='glossary-table'><thead><tr>";
   headers.forEach(h => html += `<th>${h}</th>`);
   html += "</tr></thead><tbody>";
   rows.forEach(r => {
     html += "<tr>";
-    r.forEach(cell => html += `<td>${highlight(cell || "", searchQuery)}</td>`);
+    r.forEach((cell, idx) => {
+      // Only highlight columns after the first (Symbol)
+      if (idx === 0) {
+        html += `<td>${cell || ""}</td>`;
+      } else {
+        html += `<td>${highlight(cell || "", searchQuery)}</td>`;
+      }
+    });
     html += "</tr>";
   });
   html += "</tbody></table>";

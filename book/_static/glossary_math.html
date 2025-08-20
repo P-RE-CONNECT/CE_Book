@@ -291,7 +291,8 @@ function renderGlossary() {
     .map(row => [row["Symbol"], row["Name"], row["Use"]])
     .filter(row =>
       !searchQuery ||
-      row.some(cell => (cell||'').toString().toLowerCase().includes(searchQuery))
+      // Only search in Name and Meaning columns (i.e., columns 1 and 2)
+      row.slice(1).some(cell => (cell||'').toString().toLowerCase().includes(searchQuery))
     );
 
   let html = "<table class='glossary-table'><thead><tr>";
@@ -299,7 +300,13 @@ function renderGlossary() {
   html += "</tr></thead><tbody>";
   rows.forEach(r => {
     html += "<tr>";
-    r.forEach(cell => html += `<td>${highlight(cell || "", searchQuery)}</td>`);
+    r.forEach((cell, idx) => {
+      if (idx === 0) {
+        html += `<td>${cell || ""}</td>`;
+      } else {
+        html += `<td>${highlight(cell || "", searchQuery)}</td>`;
+      }
+    });
     html += "</tr>";
   });
   html += "</tbody></table>";
