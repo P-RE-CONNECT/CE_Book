@@ -32,7 +32,9 @@ parts:
         - file: construction_mechanics/cm3/diag_test.md
         - file: construction_mechanics/cm3/practice_exercises.md
 
-    - file: book/Overzicht Bachelor /Introduction.md
+    - file: book/Overzicht_Bachelor/Introductie.md
+      sections:
+        - file: 
 
   - caption: Overig
     chapters:
