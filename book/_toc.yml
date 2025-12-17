@@ -33,8 +33,6 @@ parts:
         - file: construction_mechanics/cm3/practice_exercises.md
 
     - file: book/Overzicht Bachelor /Introduction.md
-      sections: 
-        - file: book/Overzicht Bachelor /Constructiemechanica 1
 
   - caption: Overig
     chapters:
