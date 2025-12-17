@@ -34,7 +34,7 @@ parts:
 
     - file: book/Overzicht_Bachelor/Introductie.md
       sections:
-        - file: 
+        - file: book/Overzicht_Bachelor/Constructiemechanica1.md
 
   - caption: Overig
     chapters:
