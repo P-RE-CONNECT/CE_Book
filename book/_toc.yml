@@ -32,6 +32,10 @@ parts:
         - file: construction_mechanics/cm3/diag_test.md
         - file: construction_mechanics/cm3/practice_exercises.md
 
+      - file: Overzicht Bachelor
+        sections: 
+        - file: Constructiemechanica 1
+
   - caption: Overig
     chapters:
     - file: faq.md
