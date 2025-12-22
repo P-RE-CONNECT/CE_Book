@@ -49,6 +49,11 @@ parts:
         - file: Overzicht_Bachelor/Jaar1/Cm2.md
         - file: Overzicht_Bachelor/Jaar1/BMM.md
         - file: Overzicht_Bachelor/Jaar1/BP_3.md
+        - file: Overzicht_Bachelor/Jaar1/Lineaire_Algebra_Q4.md
+        - file: Overzicht_Bachelor/Jaar1/OCF_1.md
+        - file: Overzicht_Bachelor/Jaar1/TP.md
+        - file: Overzicht_Bachelor/Jaar1/BP_4.md
+
         
         
   - caption: Overig
