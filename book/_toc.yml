@@ -71,8 +71,10 @@ parts:
         - file: Overzicht_Bachelor/Jaar2/Waterbouwkunde.md
         - file: Overzicht_Bachelor/Jaar2/Hydrologie.md
         - file: Overzicht_Bachelor/Jaar2/BP_2-4.md
-        
-        
+    - file: Overzicht_Bachelor/Jaar3/Jaar3_introductie.md
+      sections:
+        - file: Overzicht_Bachelor/Jaar3/Surverying&Mapping.md
+        - file: Overzicht_Bachelor/Jaar3/TTI.md
         
   - caption: Overig
     chapters:
