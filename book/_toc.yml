@@ -41,6 +41,15 @@ parts:
         - file: Overzicht_Bachelor/Jaar1/Constructiemechanica1.md
         - file: Overzicht_Bachelor/Jaar1/ICT.md
         - file: Overzicht_Bachelor/Jaar1/Bp_1.md
+        - file: Overzicht_Bachelor/Jaar1/Analyse_Q2.md
+        - file: Overzicht_Bachelor/Jaar1/Schonewatersystemen.md
+        - file: Overzicht_Bachelor/Jaar1/Integraal_Ontwerpen.md
+        - file: Overzicht_Bachelor/Jaar1/Bp2.md
+        - file: Overzicht_Bachelor/Jaar1/Lineaire_Algebra_Q3.md
+        - file: Overzicht_Bachelor/Jaar1/Cm2.md
+        - file: Overzicht_Bachelor/Jaar1/BMM.md
+        - file: Overzicht_Bachelor/Jaar1/BP_3.md
+        
         
   - caption: Overig
     chapters:
