@@ -53,7 +53,17 @@ parts:
         - file: Overzicht_Bachelor/Jaar1/OCF_1.md
         - file: Overzicht_Bachelor/Jaar1/TP.md
         - file: Overzicht_Bachelor/Jaar1/BP_4.md
-
+    - file: Overzicht_Bachelor/Jaar1/Jaar2_introductie.md
+      sections:
+        - file: Overzicht_Bachelor/Jaar2/DV.md
+        - file: Overzicht_Bachelor/Jaar2/CM3.md
+        - file: Overzicht_Bachelor/Jaar2/Dynamica.md
+        - file: Overzicht_Bachelor/Jaar2/BP_2-1.md
+        - file: Overzicht_Bachelor/Jaar2/Kans_Stat.md
+        - file: Overzicht_Bachelor/Jaar2/Grondmechanica.md
+        - file: Overzicht_Bachelor/Jaar2/Beton_en_Staal.md
+        - file: Overzicht_Bachelor/Jaar2/BP_2-2.md
+        
         
         
   - caption: Overig
