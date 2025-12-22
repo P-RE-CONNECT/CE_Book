@@ -35,6 +35,7 @@ parts:
   - caption: Overzicht Bachelor
     chapters:
     - file: Overzicht_Bachelor/Introductie.md
+    - file: book/Overzicht_Bachelor/Jaar1_introductie.md
       sections:
         - file: Overzicht_Bachelor/Constructiemechanica1.md
 
