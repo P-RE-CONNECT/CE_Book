@@ -75,6 +75,8 @@ parts:
       sections:
         - file: Overzicht_Bachelor/Jaar3/Surverying&Mapping.md
         - file: Overzicht_Bachelor/Jaar3/TTI.md
+        - file: Overzicht_Bachelor/Jaar3/SW&M.md
+        - file: Overzicht_Bachelor/Jaar3/BEP.md
         
   - caption: Overig
     chapters:
