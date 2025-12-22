@@ -37,10 +37,10 @@ parts:
     - file: Overzicht_Bachelor/Introductie.md
     - file: book/Overzicht_Bachelor/Jaar1/Jaar1_introductie.md
       sections:
-        - file: book/Overzicht_Bachelor/Jaar1/Analyse Q1
+        - file: book/Overzicht_Bachelor/Jaar1/Analyse_Q1.md
         - file: book/Overzicht_Bachelor/Jaar1/Constructiemechanica1.md
         - file: book/Overzicht_Bachelor/Jaar1/ICT.md
-        - file: book/Overzicht_Bachelor/Jaar1/Bp_1
+        - file: book/Overzicht_Bachelor/Jaar1/Bp_1.md
         
   - caption: Overig
     chapters:
