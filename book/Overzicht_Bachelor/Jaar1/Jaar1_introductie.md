@@ -3,6 +3,6 @@ In het eerste jaar van de bachelor Civiele Techniek leer je veel basisvaardighed
 
 Daarnaast maak je in het eerste jaar kennis met verschillende onderdelen van de civiele techniek en leer je hoe deze met elkaar samenhangen. Deze basiskennis en vaardigheden worden in de volgende jaren verder uitgewerkt en toegepast. Dit overzicht laat zien hoe de vakken in het eerste jaar met elkaar verbonden zijn en hoe ze samen de basis vormen voor de rest van de opleiding.
 
-<img width="4174" height="862" alt="Jaar 1" src="https://github.com/user-attachments/assets/7fc44df8-6bfe-4b9f-89de-0c3648239926" />
+<img width="1044" height="216" alt="Jaar 1" src="https://github.com/user-attachments/assets/7fc44df8-6bfe-4b9f-89de-0c3648239926" />
 
 
