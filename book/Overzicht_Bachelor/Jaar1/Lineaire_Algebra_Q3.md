@@ -4,6 +4,8 @@ Lineaire Algebra 1 legt de basis voor het werken met vectoren, matrices en matri
 
 Dit vak is essentieel voor het begrijpen van wiskundige technieken in civiele techniek en vormt een belangrijke voorbereiding op vakken zoals Transportplanning en -ontwerp (TP), en vooral Lineaire Algebra Q2 en Differentiaalvergelijkingen (DV’s).
 
+Daarnaast zijn er ook vaardigheden die verder in de opleiding terugkomen, zoals het opstellen van stelsels van differentiaalvergelijkingen. Dit wordt gebruikt in vakken zoals Differentiaalvergelijkingen, Dynamica van Systemen en Dynamica & Modelvorming.
+
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=9&view=lecture
 ```
 
