@@ -7,5 +7,5 @@ Daarmee is dit een basisvak dat nodig is voor vrijwel alle wiskundevakken en toe
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=1&view=lecture
 :width: 500
-:height: 1000
+:height: 10000
 ```
