@@ -3,5 +3,6 @@ In het tweede jaar van de bachelor Civiele Techniek wordt voortgebouwd op de bas
 
 Daarnaast ga je in het tweede jaar dieper in op de verschillende disciplines binnen de civiele techniek, zoals constructies, water en geotechniek. De samenhang tussen deze onderdelen wordt steeds duidelijker door integratie in projecten en practica. De kennis en vaardigheden die je in dit jaar opdoet vormen een essentiële schakel tussen de brede basis van jaar 1 en de verdere specialisatie en professionalisering in de latere jaren van de opleiding.
 
-<img width="1044" height="216" alt="Jaar 2" src="https://github.com/user-attachments/assets/cfceebd3-45b1-40e6-a9d9-81a69835ea17" />
+![Overzicht Bachelor Jaar 2 Semester 1](img/Jaar_2_1-2.png)
 
+![Overzicht Bachelor Jaar 2 Semester 2](img/Jaar_2_3-4.png)
