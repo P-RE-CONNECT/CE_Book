@@ -4,5 +4,7 @@ Met Numerieke Wiskunde leert de student elementaire numerieke methoden te ontwer
 Basiskennis uit algebra, analyse en kans- en statistiek komt in dit vak terug, en de verworven vaardigheden worden toegepast in het practicum van Bouwplaats 2-4.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=29&view=lecture
+:width: 700px
+:height: 800px
 ```
 
