@@ -7,5 +7,7 @@ Samen met Lineaire Algebra 1 in Q3 vormt dit vakpakket 6 studiepunten en biedt h
 Het gebruik van matrixtransformaties is belangrijk voor het programmeren met Python in het tweede jaar. Daarnaast zijn wiskundige vaardigheden zoals kennis van (complexe) eigenwaarden essentieel voor vakken zoals Dynamica van Systemen, Numerieke Wiskunde en Differentiaalvergelijkingen. Ook het opstellen van stelsels van differentiaalvergelijkingen wordt in veel vakken gebruikt, zoals Differentiaalvergelijkingen, Dynamica van Systemen en Dynamica & Modelvorming.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=13&view=lecture
+:width: 800px
+:height: 1000px
 ```
 
