@@ -5,7 +5,7 @@ Het vak Dynamica en Modelvorming richt zich op het schematiseren van systemen in
 Voor dit vak is kennis van Analyse en Lineaire Algebra nodig, met name bij vectorrekening, partiële differentiëren en het oplossen van (stelsels van) differentiaalvergelijkingen. Dynamica en Modelvorming vormt een belangrijke basis voor Dynamische Systemen (DvS) en Vloeistofmechanica, waarin het voorspellen en interpreteren van dynamisch systeemgedrag centraal staat.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=19&view=lecture
-:width: 800px
-:height: 950px
+:width: 700px
+:height: 900px
 ```
 
