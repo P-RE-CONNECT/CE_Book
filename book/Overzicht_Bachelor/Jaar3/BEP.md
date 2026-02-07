@@ -4,6 +4,6 @@ Het Bachelor Eindwerkstuk (BEP) bouwt voort op kennis en vaardigheden uit eerder
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=36&view=lecture
 :width: 900px
-:height: 700px
+:height: 900px
 ```
 
