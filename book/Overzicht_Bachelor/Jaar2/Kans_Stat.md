@@ -4,5 +4,7 @@ Het vak bestaat inhoudelijk uit twee samenhangende onderdelen: kansrekening en s
 Onderdelen van kans en statistiek komen in veel andere vakken terug. Berekeningen met betrekking tot kansen en verwachtingen worden toegepast in bepaalde onderwerpen binnen waterbouwkunde en in programmeren. Het opstellen en toetsen van modellen komt terug in de BEP, Surveying and Mapping en numerieke wiskunde.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=21&view=lecture
+:width: 1000px
+:height: 800px
 ```
 
