@@ -6,6 +6,6 @@ Voor dit vak is basiskennis uit andere vakken vereist, zoals wiskundige vaardigh
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=26&view=lecture
 :width: 800px
-:height: 900px
+:height: 800px
 ```
 
