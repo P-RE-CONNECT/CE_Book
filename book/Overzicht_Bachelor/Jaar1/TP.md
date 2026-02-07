@@ -6,6 +6,6 @@ Transport en Planning is een zelfstandig vak en vormt, samen met het nieuwe vak 
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=15&view=lecture
 :width: 800px
-:height: 1000px
+:height: 900px
 ```
 
