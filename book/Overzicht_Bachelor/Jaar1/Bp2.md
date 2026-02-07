@@ -5,5 +5,7 @@ Bouwplaats 1-2 bouwt voort op Bouwplaats 1-1 en richt zich op praktische vaardig
 De vaardigheden uit dit vak zijn essentieel voor Integraal Ontwerpen, Multi-Criteria Analyse, Bouwplaats 1-4, het werken met MS Project en het toepassen van rapportagetechnieken.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=8&view=lecture
+:width: 800px
+:height: 1000px
 ```
 
