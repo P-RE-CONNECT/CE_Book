@@ -5,6 +5,6 @@ Basiskennis uit veel andere vakken komt in dit vak terug. Zo worden onderdelen g
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=25&view=lecture
 :width: 1000px
-:height: 1000px
+:height: 1200px
 ```
 
