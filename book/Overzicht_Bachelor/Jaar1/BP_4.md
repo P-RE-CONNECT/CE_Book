@@ -6,6 +6,6 @@ Met de kennis en ervaring uit Bouwplaats 1-4 beschik je over de basishandelingen
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=16&view=lecture
 :width: 800px
-:height: 1000px
+:height: 900px
 ```
 
