@@ -6,6 +6,6 @@ De onderwerpen van dit vak komen in vrijwel alle vervolgvakken terug. Begrippen 
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=2&view=lecture
 :width: 800px
-:height: 1000px
+:height: 700px
 ```
 
