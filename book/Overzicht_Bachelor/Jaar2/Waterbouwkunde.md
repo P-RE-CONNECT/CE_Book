@@ -4,6 +4,6 @@ Het vak Waterbouwkunde gaat over het begrijpen, beheren en ontwerpen van watersy
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=30&view=lecture
 :width: 700px
-:height: 800px
+:height: 500px
 ```
 
