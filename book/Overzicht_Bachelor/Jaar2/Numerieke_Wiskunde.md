@@ -5,6 +5,6 @@ Basiskennis uit algebra, analyse en kans- en statistiek komt in dit vak terug, e
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=29&view=lecture
 :width: 700px
-:height: 700px
+:height: 500px
 ```
 
