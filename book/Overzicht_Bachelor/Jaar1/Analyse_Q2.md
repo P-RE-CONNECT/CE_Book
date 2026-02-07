@@ -6,6 +6,6 @@ Als je voor Analyse Q1 en Q2 de colleges goed bijhoudt, de oefententamens regelm
 De verdieping van Analyse in Q2 is erg belangrijk voor de vervolg­vakken. Je maakt kennis met verschillende coördinatensystemen, die veel gebruikt zullen worden in bachelorvakken uit het tweede leerjaar, zoals Dynamica & Modelvorming en Vloeistofmechanica. Daarnaast maak je kennis met vectoren, die van pas komen bij Algebra en later ook bij Dynamica & Modelvorming. Verschillende differentiatietechnieken, zoals partiële afgeleiden, komen eveneens terug in veel vakken. Dit geldt niet alleen voor wiskundige vakken zoals Differentiaalvergelijkingen, maar ook voor toepassingsgerichte vakken zoals Dynamica & Modelvorming.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=5&view=lecture
-:width: 1000px
+:width: 1500px
 :height: 900px
 ```
