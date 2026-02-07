@@ -4,5 +4,5 @@ Schone Watersystemen is een nieuw vrij vak dat vooral aansluit bij Stedelijk Wat
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=6&view=lecture
 :width: 800px
-:height: 1000px
+:height: 700px
 ```
