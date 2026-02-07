@@ -6,5 +6,5 @@ Met name de rapportagetechnieken en tekentechnieken uit dit vak vormen belangrij
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=4&view=lecture
 :width: 800px
-:height: 700px
+:height: 500px
 ```
