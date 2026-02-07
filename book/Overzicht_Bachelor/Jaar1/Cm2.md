@@ -6,6 +6,6 @@ Samen met het vak 'Bouwmaterialen en Milieu' vormt dit vak de basis voor wat int
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=10&view=lecture
 :width: 800px
-:height: 1000px
+:height: 800px
 ```
 
