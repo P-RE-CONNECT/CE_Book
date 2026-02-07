@@ -5,5 +5,7 @@ Vloeistofmechanica leert studenten fundamentele vloeistofproblemen in de Civiele
 Voor dit vak is basiskennis uit andere vakken vereist, zoals wiskundige vaardigheden uit analyse voor het werken met verschillende coördinatenstelsels en kennis van energiebalansen en bewegingsvergelijkingen vanuit dynamica en modelvorming. Onderdelen van vloeistofmechanica die zijn gerelateerd aan druk en krachten komen ook terug in waterbouwkundige toepassingen.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=26&view=lecture
+:width: 700px
+:height: 800px
 ```
 
