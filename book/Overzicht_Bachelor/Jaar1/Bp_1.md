@@ -5,4 +5,6 @@ Bouwplaats 1-1 loopt door het hele eerste jaar en richt zich op de praktische va
 Met name de rapportagetechnieken en tekentechnieken uit dit vak vormen belangrijke vaardigheden die gedurende de hele opleiding terugkomen. Rapportagetechnieken zijn essentieel bij vakken waarin onderzoeken, analyses en ontwerpen moeten worden gebruikt. De tekentechnieken zijn belangrijk voor civiele ingenieurs bij het maken van beginschetsen van conceptuele ontwerpen en komen terug in verschillende vakken, zoals Integraal Ontwerpen en OCF.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=4&view=lecture
+:width: 800px
+:height: 1000px
 ```
