@@ -7,5 +7,7 @@ Dit vak is essentieel voor het begrijpen van wiskundige technieken in civiele te
 Daarnaast zijn er ook vaardigheden die verder in de opleiding terugkomen, zoals het opstellen van stelsels van differentiaalvergelijkingen. Dit wordt gebruikt in vakken zoals Differentiaalvergelijkingen, Dynamica van Systemen en Dynamica & Modelvorming.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=9&view=lecture
+:width: 800px
+:height: 1000px
 ```
 
