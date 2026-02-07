@@ -6,6 +6,6 @@ De vaardigheden uit dit vak zijn essentieel voor Integraal Ontwerpen, Multi-Crit
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=8&view=lecture
 :width: 800px
-:height: 1000px
+:height: 950px
 ```
 
