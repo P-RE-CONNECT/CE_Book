@@ -6,6 +6,6 @@ Basiskennis uit mechanica­vakken komt in dit vak terug, met name bij vraagstukk
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=23&view=lecture
 :width: 1000px
-:height: 800px
+:height: 1000px
 ```
 
