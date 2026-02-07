@@ -6,5 +6,5 @@ Belangrijke onderwerpen zijn de fasering van het bouw- en ontwerpproces, stakeho
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=7&view=lecture
 :width: 800px
-:height: 1000px
+:height: 600px
 ```
