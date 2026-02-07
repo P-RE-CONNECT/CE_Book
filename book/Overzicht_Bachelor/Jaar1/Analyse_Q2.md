@@ -7,5 +7,5 @@ De verdieping van Analyse in Q2 is erg belangrijk voor de vervolg­vakken. Je ma
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=5&view=lecture
 :width: 1000px
-:height: 1400px
+:height: 1600px
 ```
