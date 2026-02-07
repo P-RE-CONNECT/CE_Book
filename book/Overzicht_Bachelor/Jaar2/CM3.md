@@ -6,6 +6,6 @@ De behandelde theorie is van belang voor het begrijpen en toetsen van constructi
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=18&view=lecture
 :width: 800px
-:height: 1000px
+:height: 700px
 ```
 
