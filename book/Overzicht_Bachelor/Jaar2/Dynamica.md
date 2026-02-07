@@ -6,6 +6,6 @@ Voor dit vak is kennis van Analyse en Lineaire Algebra nodig, met name bij vecto
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=19&view=lecture
 :width: 700px
-:height: 900px
+:height: 800px
 ```
 
