@@ -7,5 +7,7 @@ Het bouwmaterialengedeelte behandelt eigenschappen van materialen zoals beton, s
 Het milieugedeelte behandelt duurzaam gebruik van materialen, levenscyclusanalyse (LCA) en milieukundige aspecten van civiele projecten. Samen met Schone Watersystemen, Hydrologie en Stedelijk Water en Milieutechniek vormt dit de basis voor het milieugedeelte van de bachelor Civiele Techniek.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=11&view=lecture
+:width: 800px
+:height: 1000px
 ```
 
