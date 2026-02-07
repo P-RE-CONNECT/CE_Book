@@ -8,6 +8,6 @@ Het milieugedeelte behandelt duurzaam gebruik van materialen, levenscyclusanalys
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=11&view=lecture
 :width: 800px
-:height: 950px
+:height: 900px
 ```
 
