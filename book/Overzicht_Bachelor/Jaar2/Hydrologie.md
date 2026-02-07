@@ -4,6 +4,6 @@ Het vak behandelt de rol van hydrologie bij mondiale en lokale watervraagstukken
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=31&view=lecture
 :width: 700px
-:height: 700px
+:height: 600px
 ```
 
