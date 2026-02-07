@@ -5,5 +5,7 @@ Constructiemechanica 1 vormt de basis voor het begrijpen van hoe constructies zi
 De onderwerpen van dit vak komen in vrijwel alle vervolgvakken terug. Begrippen als evenwicht, snedekrachten en virtuele arbeid vormen de basis voor Constructiemechanica 2 en 3, maar ook voor toepassingsvakken zoals waterbouwkunde. Verder leer je veel basis vaardigheden die de rest van de opleiding worden gebruikt, zoals het rekenen met momenten. Constructiemechanica 1 is daarmee een essentieel basisvak voor het verdere constructieve deel van de opleiding.
 
 ```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=2&view=lecture
+:width: 800px
+:height: 1000px
 ```
 
