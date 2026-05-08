@@ -5,7 +5,7 @@ Deze basis is onmisbaar voor vervolgvakken zoals Analyse Q2, waar de stof wordt 
 
 Daarmee is dit een basisvak dat nodig is voor vrijwel alle wiskundevakken en toepassingsvakken zoals dynamica, vloeistofmechanica en CM. Het is daarom een van de vakken die het meest geschikt zijn om in het eerste jaar van de opleiding te behalen, omdat het sterk bijdraagt aan het begrijpen van alle vervolgvakken.
 
-```{iframe} https://prime-applets.ewi.tudelft.nl/graph/SBOUDO/show?lecture=1&view=lecture
+```{iframe} https://prime-applets.ewi.tudelft.nl/graph/P-RE-CONNECT/Analyse%20Q1?lecture=1&view=lecture
 :width: 800px
 :height: 900px
 ```
