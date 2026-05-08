@@ -5,4 +5,4 @@ Daarnaast maak je in het eerste jaar kennis met verschillende onderdelen van de 
 
 ![Overzicht Bachelor Jaar 1 Semester 1](img/Jaar_1_1-2.png)
 
-
+![Overzicht_Bachelor_Jaar_1_Semester_2](img/Jaar_1_3-4.png)
