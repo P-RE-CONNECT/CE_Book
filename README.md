@@ -31,6 +31,8 @@ Dit boek is ontwikkeld en onderhouden door:
 - Dr.i. A.A. (Sandra) Verhagen
 - J. (Jimmy) van der Wereld
 - T. (Thom) van der Ven
+- J. (Joash) van der Windt
+- S. (Salma) Boudount
 
 ## 📬 Contact
 Voor vragen of feedback kunt u contact opnemen met het cursuscoördinatieteam of een probleem openen in deze repository.
